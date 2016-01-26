@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+//using System.Web;
 
 namespace OAuth
 {
@@ -258,9 +259,11 @@ namespace OAuth
 
             // Separating &'s are not URL encoded
             var requestMethod = string.Concat(method.ToUpper(), "&");
-            var requestUrl = string.Concat(UrlEncodeRelaxed(ConstructRequestUrl(new Uri(url))), "&");
+
+            var urlIfied = new Uri(url);
+            var requestUrl = string.Concat(UrlEncodeRelaxed(ConstructRequestUrl(urlIfied)), "&");
             var requestParameters = UrlEncodeRelaxed(NormalizeRequestParameters(parameters));
-            
+
             sb.Append(requestMethod);
             sb.Append(requestUrl);
             sb.Append(requestParameters);

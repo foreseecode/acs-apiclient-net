@@ -53,7 +53,13 @@ namespace AcsApi
         /// <summary>
         /// The services login
         /// </summary>
-        internal const string ServicesLoginUrl = "services/login";
+        internal const string ServicesLoginUrl = "login";
+
+        /// <summary>
+        /// acs services login path
+        /// </summary>
+        internal const string AcsServicesLoginUrl = "acs-services/access";
+
 
         /// <summary>
         /// The username
