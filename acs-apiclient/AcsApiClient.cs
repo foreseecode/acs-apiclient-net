@@ -29,13 +29,18 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Web;
 using acs_apiclient;
+using Newtonsoft.Json;
 using OAuth;
+//using RestSharp;
 
 namespace AcsApi
 // ReSharper restore CheckNamespace
@@ -83,6 +88,8 @@ namespace AcsApi
         /// </summary>
         private const string OauthTokenSecretKey = "oauth_token_secret";
 
+        private readonly bool _acsPortal = false;
+
         /// <summary>
         /// Key name of the session id cookie.
         /// </summary>
@@ -107,7 +114,7 @@ namespace AcsApi
         /// </summary>
         /// <param name="config"><see cref="AcsApiClient"/> instance containing configuration details.
         /// </param>
-        public AcsApiClient(AcsApiClientConfig config)
+        public AcsApiClient(AcsApiClientConfig config, bool isAcsPortal = false)
         {
             if (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
             {
@@ -116,6 +123,8 @@ namespace AcsApi
 
             serviceConfig = config;
             cookies = new CookieCollection();
+
+            _acsPortal = isAcsPortal;
         }
 
         /// <summary>
@@ -150,11 +159,11 @@ namespace AcsApi
                 {
                     GetToken();
                 }
-                catch (AcsApiException)
+                catch (AcsApiException ex)
                 {
                     throw;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     // return non-specific error and destroy call stack
                     throw new Exception(GenericAuthorizationErrorMessage);
@@ -175,7 +184,33 @@ namespace AcsApi
             };
 
             // Using HTTP header authorization
-            return client.GetAuthorizationHeader();
+            return client.GetAuthorizationHeader(ParseParamCollection(new Uri(requestUrl)));
+        }
+
+        public IDictionary<string, string> ParseParamCollection(Uri path)
+        {
+            var paramsParsed = new Dictionary<string, string>();
+            if (string.IsNullOrEmpty(path.Query))
+            {
+                return paramsParsed;
+            }
+
+            var results = HttpUtility.UrlDecode(path.Query)?.TrimStart('?').Split('&');
+            if (results == null)
+            {
+                return paramsParsed;
+            }
+            foreach (var item in results)
+            {
+                var pairs = item.Split('=');
+                if (paramsParsed.ContainsKey(pairs[0]))
+                {
+                    throw new InvalidOperationException("Multiple parameters with the same name!");
+                }
+
+                paramsParsed.Add(pairs[0], Uri.EscapeDataString(pairs[1]));
+            }
+            return paramsParsed;
         }
 
         /// <summary>
@@ -487,6 +522,72 @@ namespace AcsApi
         /// Get an access token
         /// </summary>
         private void GetToken()
+        {
+            if (_acsPortal)
+            {
+                throw new NotImplementedException();
+                //LoadAcsToken();
+            }
+            else
+            {
+                LoadFssToken();
+            }
+            
+        }
+
+//        static string MakePostRequestJson(IAcsApiClient client, string path, string postBody)
+//        {
+//            try
+//            {
+//                var postBodyBytes = Encoding.UTF8.GetBytes(postBody);
+//
+//                var myHttpWebRequest = (HttpWebRequest)WebRequest.Create(path);
+//                myHttpWebRequest.Method = "POST";
+//                myHttpWebRequest.AllowAutoRedirect = false;
+//                myHttpWebRequest.ContentType = "application/json";
+//                myHttpWebRequest.ContentLength = postBodyBytes.Length;
+//
+//                using (var requestStream = myHttpWebRequest.GetRequestStream())
+//                {
+//                    requestStream.Write(postBodyBytes, 0, postBodyBytes.Length);
+//                    requestStream.Close();
+//                }
+//
+//                var response = myHttpWebRequest.GetResponse();
+//                
+//                if(response.)
+//            }
+//            catch
+//            {
+//                throw new AcsApiException(AcsApiError.CouldNotLogin);
+//            }
+//        }
+//
+//        private void LoadAcsToken()
+//        {
+////            dynamic requestDetails = new ExpandoObject();
+////            requestDetails.consumerKey = serviceConfig.ConsumerKey;
+////            requestDetails.consumerSecret = serviceConfig.ConsumerSecret;
+////            requestDetails.username = serviceConfig.PortalUsername;
+////            requestDetails.password = serviceConfig.PortalPassword;
+////
+////            string loginRequest = JsonConvert.SerializeObject(requestDetails);
+////            var client = new RestClient(serviceConfig.ServerRoot + "acs-services");
+////            var request = new RestRequest("access", Method.POST);
+////            request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
+////
+////            var response = client.Execute(request);
+////            if (response.StatusCode != HttpStatusCode.OK)
+////            {
+////                throw new AcsApiException(AcsApiError.CouldNotLogin);
+////            }
+////
+////            dynamic unmarshalledResponse = JsonConvert.DeserializeObject(response.Content);
+////            serviceConfig.AccessToken = unmarshalledResponse.token;
+////            serviceConfig.AccessTokenSecret = unmarshalledResponse.secret;
+//        }
+
+        private void LoadFssToken()
         {
             // Creating a new instance directly
             var client = new OAuthRequest
