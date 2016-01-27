@@ -40,6 +40,8 @@ using System.Web;
 using acs_apiclient;
 using Newtonsoft.Json;
 using OAuth;
+using RestSharp;
+
 //using RestSharp;
 
 namespace AcsApi
@@ -344,10 +346,7 @@ namespace AcsApi
             }
             public void Dispose()
             {
-                if (_response != null)
-                {
-                    _response.Close();
-                }
+                _response?.Close();
             }
         }
 
@@ -464,12 +463,9 @@ namespace AcsApi
 
             // bbax: response streams being closed while dealing with exceptions... yey..
             // todo: clean this up more...
-            if (authReqResp == null || authReqResp.Headers == null)
+            if (authReqResp?.Headers == null)
             {
-                if (authReqResp != null)
-                {
-                    authReqResp.Close();
-                }
+                authReqResp?.Close();
                 throw new AcsApiException(AcsApiError.CouldNotLogin);
             }
             return authReqResp;
@@ -525,8 +521,7 @@ namespace AcsApi
         {
             if (_acsPortal)
             {
-                throw new NotImplementedException();
-                //LoadAcsToken();
+                LoadAcsToken();
             }
             else
             {
@@ -535,57 +530,51 @@ namespace AcsApi
             
         }
 
-//        static string MakePostRequestJson(IAcsApiClient client, string path, string postBody)
-//        {
-//            try
-//            {
-//                var postBodyBytes = Encoding.UTF8.GetBytes(postBody);
-//
-//                var myHttpWebRequest = (HttpWebRequest)WebRequest.Create(path);
-//                myHttpWebRequest.Method = "POST";
-//                myHttpWebRequest.AllowAutoRedirect = false;
-//                myHttpWebRequest.ContentType = "application/json";
-//                myHttpWebRequest.ContentLength = postBodyBytes.Length;
-//
-//                using (var requestStream = myHttpWebRequest.GetRequestStream())
-//                {
-//                    requestStream.Write(postBodyBytes, 0, postBodyBytes.Length);
-//                    requestStream.Close();
-//                }
-//
-//                var response = myHttpWebRequest.GetResponse();
-//                
-//                if(response.)
-//            }
-//            catch
-//            {
-//                throw new AcsApiException(AcsApiError.CouldNotLogin);
-//            }
-//        }
-//
-//        private void LoadAcsToken()
-//        {
-////            dynamic requestDetails = new ExpandoObject();
-////            requestDetails.consumerKey = serviceConfig.ConsumerKey;
-////            requestDetails.consumerSecret = serviceConfig.ConsumerSecret;
-////            requestDetails.username = serviceConfig.PortalUsername;
-////            requestDetails.password = serviceConfig.PortalPassword;
-////
-////            string loginRequest = JsonConvert.SerializeObject(requestDetails);
-////            var client = new RestClient(serviceConfig.ServerRoot + "acs-services");
-////            var request = new RestRequest("access", Method.POST);
-////            request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
-////
-////            var response = client.Execute(request);
-////            if (response.StatusCode != HttpStatusCode.OK)
-////            {
-////                throw new AcsApiException(AcsApiError.CouldNotLogin);
-////            }
-////
-////            dynamic unmarshalledResponse = JsonConvert.DeserializeObject(response.Content);
-////            serviceConfig.AccessToken = unmarshalledResponse.token;
-////            serviceConfig.AccessTokenSecret = unmarshalledResponse.secret;
-//        }
+        // bbax: case matters... 
+        internal class LoginRequestToken
+        {
+            public string consumerKey { get; set; }
+            public string consumerSecret { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+
+        // bbax: case matters... 
+        internal class LoginRequestResponse
+        {
+            public string token { get; set; }
+            public string secret { get; set; }
+        }
+
+        private void LoadAcsToken()
+        {
+            var requestDetails = new LoginRequestToken
+            {
+                consumerKey = serviceConfig.ConsumerKey,
+                consumerSecret = serviceConfig.ConsumerSecret,
+                password = serviceConfig.PortalPassword,
+                username = serviceConfig.PortalUsername
+            };
+
+            var loginRequest = JsonConvert.SerializeObject(requestDetails);
+            var client = new RestClient(serviceConfig.ServerRoot);
+            var request = new RestRequest(AcsApiClientConfig.AcsServicesLoginUrl, Method.POST);
+            request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
+
+            var response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new AcsApiException(AcsApiError.CouldNotLogin);
+            }
+
+            var unmarshalledResponse = JsonConvert.DeserializeObject(response.Content, typeof (LoginRequestResponse)) as LoginRequestResponse;
+            if (unmarshalledResponse == null)
+            {
+                throw new AcsApiException("Failed to unmarshall the login request!");
+            }
+            serviceConfig.AccessTokenSecret = unmarshalledResponse.secret;
+            serviceConfig.AccessToken = unmarshalledResponse.token;
+        }
 
         private void LoadFssToken()
         {
