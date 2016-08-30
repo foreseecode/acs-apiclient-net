@@ -1,0 +1,8 @@
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# generated files
+bin/
+acs-apiclient/bin
+acs-apiclient/obj
+packages/
