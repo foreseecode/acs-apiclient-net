@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+ <metadata>
+   <id>acs-apiclient</id>
+   <version>0.5.0-beta</version>
+   <title>ACS API Client</title>
+   <authors>Answers Cloud Services</authors>
+   <owners>Answers Cloud Services</owners>
+   <requireLicenseAcceptance>false</requireLicenseAcceptance>
+   <description>Helper library for connecting to the Answers Cloud Services (ForeSee in particular) web API in a headless manner.</description>
+   <summary>Helper library for connecting to the Answers Cloud Services (ForeSee in particular) web API in a headless manner. You can use this to simplify connecting to the ACS api without requiring a browser or user interaction to grant access to a particular account.  Also available for node.js: https://www.npmjs.com/package/acs-apiclient</summary>
+   <releaseNotes>v0.5.0 (Beta): ACS Services Support</releaseNotes>
+   <copyright>2015 Answers Cloud Services</copyright>
+   <tags></tags>
+ </metadata>
+ <files>
+     <file src="lib\MonoAndroid10\*" target="lib\MonoAndroid10" />
+     <file src="lib\MonoTouch10\*" target="lib\MonoTouch10" />
+     <file src="lib\MonoTouch10\*" target="lib\Xamarin.iOS10" />
+     <file src="lib\net40\*" target="lib\net40" />
+ </files>
+</package>
