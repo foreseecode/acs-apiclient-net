@@ -1,4 +1,4 @@
-﻿namespace OAuth
+namespace OAuth
 {
     /// <summary>
     /// Specifies whether the final signature value should be escaped during calculation.
