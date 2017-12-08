@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Net;
 
-namespace acs_apiclient
+namespace AcsApi
 {
     internal class AcsApiSetCookieHeaderParser
     {
