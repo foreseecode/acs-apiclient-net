@@ -1,10 +1,10 @@
-﻿//Code taken from: http://snipplr.com/view/4427/ideabubbling.com
+//Code taken from: http://snipplr.com/view/4427/ideabubbling.com
 //No license was attached to the snippet
 using System;
 using System.Collections;
 using System.Net;
 
-namespace acs_apiclient
+namespace AcsApi
 {
     internal class AcsApiSetCookieHeaderParser
     {
