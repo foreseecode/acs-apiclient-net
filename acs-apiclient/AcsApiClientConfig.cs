@@ -97,6 +97,11 @@ namespace AcsApi
         public string AccessTokenSecret { get; set; }
 
         /// <summary>
+        /// Determines if the AcsApiClient was created from the SSO Flow
+        /// </summary>
+        public bool IsSSOClient { get; internal set; } = false;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
         /// </summary>
         /// <param name="consumerKey">
@@ -114,8 +119,13 @@ namespace AcsApi
         /// <param name="portalPassword">
         /// The password for ACS portal services.
         /// </param>
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword)
-        {
+        internal AcsApiClientConfig(
+            string consumerKey, 
+            string consumerSecret, 
+            string serverRoot, 
+            string portalUsername = "", 
+            string portalPassword = ""
+        ) {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
             this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";

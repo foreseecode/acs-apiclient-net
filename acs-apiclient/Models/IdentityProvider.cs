@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace AcsApi.Models
@@ -7,24 +10,46 @@ namespace AcsApi.Models
     public class IdentityProvider
     {
         [JsonProperty("identityProviderId")]
-        public string IdentityProviderId { get; set; }
+        internal string IdentityProviderId { get; set; }
 
         [JsonProperty("baseAuthRequestUrl")]
-        public string BaseAuthenticationRequestUrl { get; set; }
+        internal string BaseAuthenticationRequestUrl { get; set; }
 
         [JsonProperty("clientId")]
-        public string ClientId { get; set; }
+        internal string ClientId { get; set; }
 		
         [JsonProperty("clientName")]
         public string ClientName { get; set; }
 
         [JsonProperty("defaultParams")]
-        public string DefaultParameters { get; set; }
+        internal string DefaultParameters { get; set; }
 
         [JsonProperty("defaultRedirectUrl")]
-        public string DefaultRedirectUrl { get; set; }
+        internal string DefaultRedirectUrl { get; set; }
 		
         [JsonProperty("ssoEnabled")]
-		public bool IsSSOEnabled { get; set; }
+		internal bool IsSSOEnabled { get; set; }
+
+        [JsonIgnore]
+        internal string state { get; private set; }
+
+        [JsonIgnore]
+        public string UrlString {
+            get {
+                var parameters = HttpUtility.ParseQueryString(DefaultParameters);
+                var encodedParameters = (
+                    from parameterKey in parameters.AllKeys
+                    from parameterValue in parameters.GetValues(parameterKey)
+                    select $"{ HttpUtility.UrlEncode(parameterKey) }={ HttpUtility.UrlEncode(parameterValue) }"
+                ).ToArray();
+                var parameterString = string.Join("&", encodedParameters);
+                return $"{ BaseAuthenticationRequestUrl.TrimEnd('/') }?{ parameterString }" +
+                    $"&redirect_uri={ DefaultRedirectUrl }" +
+                    $"&state={ state }";
+            }
+        }
+
+        [OnDeserialized]
+        internal void GenerateStateString(StreamingContext context) => state = Guid.NewGuid().ToString();
     }
 }

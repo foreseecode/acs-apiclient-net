@@ -119,8 +119,10 @@ namespace AcsApi
         /// </param>
         public AcsApiClient(AcsApiClientConfig config, bool isAcsPortal = false)
         {
-            if (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
-            {
+            if (
+                !config.IsSSOClient 
+                && (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
+            ) {
                 throw new AcsApiException(AcsApiError.InvalidCredentials);
             }
 
@@ -162,11 +164,11 @@ namespace AcsApi
                 {
                     GetToken();
                 }
-                catch (AcsApiException ex)
+                catch (AcsApiException)
                 {
                     throw;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // return non-specific error and destroy call stack
                     throw new Exception(GenericAuthorizationErrorMessage);
@@ -411,7 +413,7 @@ namespace AcsApi
                 newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(responseCookies,
                     new Uri(serviceConfig.ServerRoot).Host);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new AcsApiException("Could not parse cookie for final request!");
             }
@@ -446,7 +448,7 @@ namespace AcsApi
                 newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(setCookieHeader,
                     new Uri(serviceConfig.ServerRoot).Host);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new AcsApiException("Could not parse cookie for final request!");
             }
@@ -459,7 +461,7 @@ namespace AcsApi
             }
             catch (WebException wex)
             {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
+                throw new AcsApiException(AcsApiError.ServerUnreachable.ToString(), wex);
             }
 
             // bbax: response streams being closed while dealing with exceptions... yey..
@@ -494,7 +496,7 @@ namespace AcsApi
                 newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(consumerCookies,
                     new Uri(serviceConfig.ServerRoot).Host);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new AcsApiException("Could not parse cookie for final request!");
             }
@@ -510,7 +512,7 @@ namespace AcsApi
             }
             catch (WebException wex)
             {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
+                throw new AcsApiException(AcsApiError.ServerUnreachable.ToString(), wex);
             }
             return accessTokenResponse;
         }
@@ -634,7 +636,7 @@ namespace AcsApi
             }
             catch (WebException wex)
             {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
+                throw new AcsApiException(AcsApiError.ServerUnreachable.ToString(), wex);
             }
 
             var target = new Uri(serviceConfig.ServerRoot);
