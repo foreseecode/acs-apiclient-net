@@ -18,7 +18,7 @@ namespace AcsApi
         /// The ForeSee Services base URL.
         /// </summary>
 		internal string ServicesBaseUrl { get; private set; }
-		
+
         /// <summary>
         /// The SSO Client Identifier provided by the ForeSee Support Team. This is a unique value for each client.
         /// </summary>
@@ -49,6 +49,27 @@ namespace AcsApi
             $"{ Utility.Base64Encode($"{ SSOClientId }:{ SSOClientSecret }") }";
 
         /// <summary>
+        /// The username of the identity sent to LoginController's InitializeIdentity method.
+        /// </summary>
+        public string Username { get; internal set; }
+
+        /// <summary>
+        /// The password of the currently set username. This is changed by LoginController during the password flow.
+        /// </summary>
+        public string Password { get; internal set; }
+
+        /// <summary>
+        /// Generates a new AcsApiClientConfig.
+        /// </summary>
+        public AcsApiClientConfig ApiClientConfiguration => new AcsApiClientConfig(
+            ClientKey, 
+            ClientSecret, 
+            ServicesBaseUrl, 
+            Username, 
+            Password
+        );
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:AcsApi.LoginConfiguration"/> struct.
         /// </summary>
         /// <param name="clientKey">Client key.</param>
@@ -74,6 +95,9 @@ namespace AcsApi
             SSOClientSecret = ssoClientSecret;
             Consumer = consumer;
             Environment = environment;
+
+            Username = null;
+            Password = null;
         }
     }
 }
