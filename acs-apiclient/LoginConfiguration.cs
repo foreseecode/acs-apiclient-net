@@ -62,8 +62,8 @@ namespace AcsApi
         /// Generates a new AcsApiClientConfig.
         /// </summary>
         public AcsApiClientConfig ApiClientConfiguration => new AcsApiClientConfig(
-            ClientKey, 
-            ClientSecret, 
+            ConsumerKey, 
+            ConsumerSecret, 
             ServicesBaseUrl, 
             Username, 
             Password

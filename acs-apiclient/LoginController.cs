@@ -88,15 +88,15 @@ namespace AcsApi
                     var uri = new Uri($"{ configuration.ServicesBaseUrl }/currentUser");
                     _ = apiClient.GetAuthHeadersForRequestByType(uri.AbsoluteUri, "GET");
 
-                    RunOnMainThread(() => loginDelegate.DidLoginSuccessfully(apiClient));
+                    RunOnMainThread(() => loginDelegate.Authenticated(apiClient));
                 }
                 catch (AcsApiException exception)
                 {
-                    RunOnMainThread(() => loginDelegate.DidEncounterError(exception.ErrorCode));
+                    RunOnMainThread(() => loginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    RunOnMainThread(() => loginDelegate.DidEncounterError(AcsApiError.CouldNotLogin));
+                    RunOnMainThread(() => loginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
                 }
             });
         }
