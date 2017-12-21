@@ -119,9 +119,8 @@ namespace AcsApi
         /// </param>
         public AcsApiClient(AcsApiClientConfig config, bool isAcsPortal = false)
         {
-            if (
-                !config.IsSSOClient 
-                && (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
+            if (!config.IsSSOClient 
+               && (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
             ) {
                 throw new AcsApiException(AcsApiError.InvalidCredentials);
             }
@@ -158,7 +157,7 @@ namespace AcsApi
         /// <returns>A string that can be used as the value for the "Authorization" header of an HTTP request.</returns>
         public string GetAuthHeadersForRequestByType(string requestUrl, string type)
         {
-            if (string.IsNullOrEmpty(serviceConfig.AccessToken))
+            if (string.IsNullOrEmpty(serviceConfig.OAuthToken))
             {
                 try
                 {
@@ -183,8 +182,8 @@ namespace AcsApi
                 SignatureMethod = OAuthSignatureMethod.HmacSha1,
                 ConsumerKey = serviceConfig.ConsumerKey,
                 ConsumerSecret = serviceConfig.ConsumerSecret,
-                Token = serviceConfig.AccessToken,
-                TokenSecret = serviceConfig.AccessTokenSecret,
+                Token = serviceConfig.OAuthToken,
+                TokenSecret = serviceConfig.OAuthSecret,
                 RequestUrl = requestUrl
             };
 
@@ -575,8 +574,8 @@ namespace AcsApi
             {
                 throw new AcsApiException("Failed to unmarshall the login request!");
             }
-            serviceConfig.AccessTokenSecret = unmarshalledResponse.secret;
-            serviceConfig.AccessToken = unmarshalledResponse.token;
+            serviceConfig.OAuthSecret = unmarshalledResponse.secret;
+            serviceConfig.OAuthToken = unmarshalledResponse.token;
         }
 
         private void LoadFssToken()
@@ -689,10 +688,10 @@ namespace AcsApi
                         responseOutput = readStream.ReadToEnd();
                     }
 
-                    serviceConfig.AccessToken = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenKey);
-                    serviceConfig.AccessTokenSecret = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenSecretKey);
+                    serviceConfig.OAuthToken = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenKey);
+                    serviceConfig.OAuthSecret = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenSecretKey);
 
-                    InvokeLog("Final Tokens: " + serviceConfig.AccessToken + " : " + serviceConfig.AccessTokenSecret);
+                    InvokeLog("Final Tokens: " + serviceConfig.OAuthToken + " : " + serviceConfig.OAuthSecret);
                 }
             }
         }

@@ -55,7 +55,7 @@ namespace AcsApi
                 request.AddParameter("consumer", configuration.Consumer);
 
                 var response = client.Execute(request);
-                if (ReceivedErrorResponseCode(response.StatusCode)) { return; }
+                if (ReceivedErrorResponseCode(response.StatusCode, response.ErrorMessage)) { return; }
 
                 var result = JsonConvert.DeserializeObject<JObject>(response.Content);
 
@@ -118,14 +118,19 @@ namespace AcsApi
             request.AddParameter("code", code, ParameterType.GetOrPost);
 
             var response = client.Execute(request);
-            if (ReceivedErrorResponseCode(response.StatusCode)) { return; }
+            if (ReceivedErrorResponseCode(response.StatusCode, response.ErrorMessage)) { return; }
 
             var result = JsonConvert.DeserializeObject<JObject>(response.Content);
 
             var accessToken = result["access_token"].ToString();
             if (string.IsNullOrEmpty(accessToken))
             {
-                RunOnMainThread(() => loginDelegate.DidEncounterError(AcsApiError.CouldNotExchangeToken));
+                RunOnMainThread(() => {
+                    loginDelegate.EncounteredError(
+                        AcsApiError.CouldNotExchangeToken, 
+                        "The OIDC Access Token is invalid."
+                    );
+                });
             }
             BeginOAuthTokenExchange(accessToken);
         }
@@ -141,8 +146,8 @@ namespace AcsApi
 
             var tokenExchangeRequestBody = new TokenExchangeRequestBody(
                 accessToken,
-                configuration.ClientKey,
-                configuration.ClientSecret,
+                configuration.ConsumerKey,
+                configuration.ConsumerSecret,
                 configuration.Consumer
             );
 
@@ -150,7 +155,7 @@ namespace AcsApi
             request.AddParameter("application/json", jsonBody, ParameterType.RequestBody);
 
             var response = client.Execute(request);
-            if (ReceivedErrorResponseCode(response.StatusCode)) { return; }
+            if (ReceivedErrorResponseCode(response.StatusCode, response.ErrorMessage)) { return; }
 
 			var result = JsonConvert.DeserializeObject<JObject>(response.Content);
 
@@ -158,32 +163,37 @@ namespace AcsApi
             var oauthSecret = result["secret"].ToString();
 
             if (string.IsNullOrEmpty(oauthToken) || string.IsNullOrEmpty(oauthSecret)) {
-                RunOnMainThread(() => loginDelegate.DidEncounterError(AcsApiError.InvalidRequestToken));
+                RunOnMainThread(() => {
+                    loginDelegate.EncounteredError(
+                        AcsApiError.InvalidRequestToken,
+                        "The OAuth token or OAuth secret is invalid"
+                    );
+                });
                 return;
             }
 
             var acsApiClientConfiguration = new AcsApiClientConfig(
-                configuration.ClientKey,
-                configuration.ClientSecret,
+                configuration.ConsumerKey,
+                configuration.ConsumerSecret,
                 configuration.ServicesBaseUrl
             );
 
             acsApiClientConfiguration.IsSSOClient = true;
-            acsApiClientConfiguration.AccessToken = oauthToken;
-            acsApiClientConfiguration.AccessTokenSecret = oauthSecret;
+            acsApiClientConfiguration.OAuthToken = oauthToken;
+            acsApiClientConfiguration.OAuthSecret = oauthSecret;
 
             try
             {
                 var acsApiClient = new AcsApiClient(acsApiClientConfiguration, true);
-                RunOnMainThread(() => loginDelegate.DidLoginSuccessfully(acsApiClient));
+                RunOnMainThread(() => loginDelegate.Authenticated(acsApiClient));
             }
             catch (AcsApiException exception)
             {
-                RunOnMainThread(() => loginDelegate.DidEncounterError(exception.ErrorCode));
+                RunOnMainThread(() => loginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                RunOnMainThread(() => loginDelegate.DidEncounterError(AcsApiError.CouldNotLogin));
+                RunOnMainThread(() => loginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
             }
         }
 
@@ -192,22 +202,21 @@ namespace AcsApi
         /// </summary>
         /// <returns><c>true</c>, if the status code is an error code, <c>false</c> otherwise.</returns>
         /// <param name="statusCode">Status code.</param>
-        bool ReceivedErrorResponseCode(HttpStatusCode statusCode)
+        bool ReceivedErrorResponseCode(HttpStatusCode statusCode, string message)
         {
             var responseCode = (int) statusCode;
             if (responseCode >= 500)
             {
-                RunOnMainThread(() => loginDelegate.DidEncounterError(AcsApiError.ServerError));
+                RunOnMainThread(() => { 
+                    loginDelegate.EncounteredError(AcsApiError.ServerError, message, statusCode.ToString());
+                });
                 return true;
             }
-            if (responseCode == 400)
+            if (responseCode >= 400)
             {
-                loginDelegate.DidEncounterError(AcsApiError.BadRequest);
-                return true;
-            }
-            if (responseCode > 400)
-            {
-                loginDelegate.DidEncounterError(AcsApiError.ClientError);
+                RunOnMainThread(() => {
+                    loginDelegate.EncounteredError(AcsApiError.ClientError, message, statusCode.ToString());
+                });
                 return true;
             }
             return false;
@@ -222,7 +231,7 @@ namespace AcsApi
         /// <summary>
         /// The SSO code returned in the intercepted callback.
         /// </summary>
-        string ssoCode;
+        string authCode;
 
         /// <summary>
         /// Determines if the next request in the web view should be intercepted.
@@ -241,12 +250,11 @@ namespace AcsApi
                 {
                     if (selectedIdentityProvider.state.Equals(state))
                     {
-                        ssoCode = code;
+                        authCode = code;
                         return true;
                     }
-                    throw new AcsApiException(AcsApiError.StateMismatch);
                 }
-                throw new AcsApiException(AcsApiError.InvalidCode);
+                throw new AcsApiException(AcsApiError.InvalidCallbackParameters);
             }
             return false;
         }
@@ -254,30 +262,30 @@ namespace AcsApi
         /// <summary>
         /// Informs the LoginDelegate that the user cancelled the login flow.
         /// </summary>
-        public void DidCancelLoginProcess()
+        public void UserCancelledLogin()
         {
-            loginDelegate.DidEncounterError(AcsApiError.Interrupted);
+            loginDelegate.EncounteredError(AcsApiError.InterruptedByUser, "The user cancelled the login flow.");
         }
 
         /// <summary>
         /// Begins the Access Token exchange after successfully intercepting the callback and dismissing the web view.
         /// </summary>
-        public void DidRetrieveCodeSuccessfully()
+        public void RetrievedAuthCode()
         {
-            if (string.IsNullOrEmpty(ssoCode))
+            if (string.IsNullOrEmpty(authCode))
             {
-                loginDelegate.DidEncounterError(AcsApiError.InvalidCode);
+                loginDelegate.EncounteredError(AcsApiError.InvalidCallbackParameters, "The Auth Code is invalid.");
             }
-            BeginAccessTokenExchange(ssoCode);
+            BeginAccessTokenExchange(authCode);
         }
 
         /// <summary>
         /// Passes an AcsApiError to the LoginDelegate.
         /// </summary>
         /// <param name="error">Error.</param>
-        public void DidEncounterError(AcsApiError error)
+        public void EncounteredError(AcsApiError error, string message, string code = "")
         {
-            loginDelegate.DidEncounterError(error);
+            loginDelegate.EncounteredError(error, message, code);
         }
     }
 }

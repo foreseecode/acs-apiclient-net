@@ -87,14 +87,14 @@ namespace AcsApi
         internal readonly string ConsumerSecret;
 
         /// <summary>
-        /// Gets or sets the Access token
+        /// A token received upon authenticating
         /// </summary>
-        public string AccessToken { get; set; }
+        public string OAuthToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the Access token secret
+        /// A secret received upon authenticating
         /// </summary>
-        public string AccessTokenSecret { get; set; }
+        public string OAuthSecret { get; set; }
 
         /// <summary>
         /// Determines if the AcsApiClient was created from the SSO Flow

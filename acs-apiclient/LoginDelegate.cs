@@ -29,13 +29,13 @@ namespace AcsApi
         /// Informs the delegate that the login flow was complete and an API Client was successfully created.
         /// </summary>
         /// <param name="apiClient">An API client used to authorize requests.</param>
-        void DidLoginSuccessfully(IAcsApiClient apiClient);
+        void Authenticated(IAcsApiClient apiClient);
 
         /// <summary>
         /// Informs the delegate that an error was encountered during the login flow. This method should implement all 
         /// cases of errors in <c>AcsApiError</c>.
         /// </summary>
         /// <param name="error">The error that was encountered.</param>
-        void DidEncounterError(AcsApiError error);
+        void EncounteredError(AcsApiError error, string message, string code = "");
     }
 }

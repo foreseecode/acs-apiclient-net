@@ -18,17 +18,17 @@ namespace AcsApi
         /// <summary>
         /// Used to inform the delegate that the user cancelled the login flow.
         /// </summary>
-        void DidCancelLoginProcess();
+        void UserCancelledLogin();
 
         /// <summary>
         /// Used to inform the delegate that the callback was intercepted, and a code was successfully received.
         /// </summary>
-        void DidRetrieveCodeSuccessfully();
+        void RetrievedAuthCode();
 
         /// <summary>
         /// Used to inform the delegate of any errors encountered during the login flow.
         /// </summary>
         /// <param name="error">An AcsApiError describing the error that was encountered.</param>
-        void DidEncounterError(AcsApiError error);
+        void EncounteredError(AcsApiError error, string message, string code = "");
     }
 }
