@@ -69,28 +69,30 @@ namespace AcsApi.iOS
 
         void PrepareNavigationBar()
         {
-            navigationBar.TintColor = UIColor.Black;
+            var obsidianColor = new UIColor(34f / 255f, 43f / 255f, 60f / 255f, 1f);
+            navigationBar.TintColor = obsidianColor;
             navigationBar.BackgroundColor = UIColor.White;
             navigationBar.Translucent = false;
+            navigationBar.TitleTextAttributes = new UIStringAttributes {
+                ForegroundColor = obsidianColor
+            };
         }
 
         void PrepareBackButton()
         {
-            var closeIcon = UIImage.FromBundle("ic_close_36pt");
-            dismissButton = new UIBarButtonItem(closeIcon, UIBarButtonItemStyle.Plain, (sender, e) =>
-            {
-                webViewLoginDelegate.DidCancelLoginProcess();
+            var closeIcon = UIImage.FromBundle("ic_close");
+            dismissButton = new UIBarButtonItem(closeIcon, UIBarButtonItemStyle.Plain, (sender, e) => {
+                webViewLoginDelegate.UserCancelledLogin();
                 DismissViewController(true, null);
             });
         }
 
         void PrepareRefreshButton()
         {
-            refreshButton = new UIBarButtonItem(UIBarButtonSystemItem.Refresh);
-            refreshButton.Clicked += (sender, e) =>
-            {
-                webView.LoadRequest(new NSUrlRequest(urlToLoad));
-            };
+            var refreshIcon = UIImage.FromBundle("ic_sync");
+            refreshButton = new UIBarButtonItem(refreshIcon, UIBarButtonItemStyle.Plain, (sender, e) => {
+				webView.LoadRequest(new NSUrlRequest(urlToLoad));            
+            });
         }
 
         void PrepareNavigationItem()
@@ -144,7 +146,7 @@ namespace AcsApi.iOS
                             decisionHandler(WKNavigationActionPolicy.Cancel);
                             DismissViewController(true, () => {
                                 InvokeInBackground(() => {
-                                    webViewLoginDelegate.DidRetrieveCodeSuccessfully();    
+                                    webViewLoginDelegate.RetrievedAuthCode();    
                                 });
                             });
 						});
@@ -157,11 +159,11 @@ namespace AcsApi.iOS
 			}
             catch (AcsApiException exception)
             {
-                InvokeOnMainThread(() => webViewLoginDelegate.DidEncounterError(exception.ErrorCode));
+                InvokeOnMainThread(() => webViewLoginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                InvokeOnMainThread(() => webViewLoginDelegate.DidEncounterError(AcsApiError.ServerUnreachable));
+                InvokeOnMainThread(() => webViewLoginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
             }
         }
     }

@@ -65,21 +65,23 @@ namespace AcsApi
         ServerError,
 
         /// <summary>The login flow was interrupted by the user.</summary>
-        Interrupted,
+        InterruptedByUser,
 
-        /// <summary>Could not exchange the token during the login flow. This might have been due to the Identity Provider.</summary>
+        /// <summary>
+        /// Could not exchange the token during the login flow. This might have been due to the Identity Provider.
+        /// </summary>
         CouldNotExchangeToken,
 
-        /// <summary>The code provided by the Identity Provider is not valid.</summary>
-        InvalidCode,
-
-        /// <summary>The state returned by the Identity Provider does not match the one it received.</summary>
-        StateMismatch,
-
-        /// <summary>The request was malformed. This could be due to invalid request parameters.</summary>
-        BadRequest,
+        /// <summary>
+        /// The code provided by the Identity Provider is not valid, or the state returned by the Identity Provider 
+        /// does not match the one it received.
+        /// </summary>
+        InvalidCallbackParameters,
 
         /// <summary>The remote server returned a client error response.</summary>
         ClientError,
+
+        /// <summary>The other. This error is used when an exception is raised which doesn't match the errors.</summary>
+        Other
     }
 }

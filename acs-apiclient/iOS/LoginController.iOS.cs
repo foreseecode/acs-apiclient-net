@@ -20,7 +20,7 @@ namespace AcsApi
         {
             if (!(context is UIViewController))
             {
-                throw new NotImplementedException(
+                throw new ArgumentException(
                     $"{ typeof(T) } is not implemented, please make sure you are using a UIViewController for the " +
                     "context parameter."
                 );
