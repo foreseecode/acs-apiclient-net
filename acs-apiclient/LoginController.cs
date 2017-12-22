@@ -44,6 +44,7 @@ namespace AcsApi
         /// <param name="username">Username.</param>
         public void InitializeIdentity(string username)
         {
+            configuration.Username = username;
             RunOnBackgroundThread(() => {
                 var client = new RestClient(configuration.ServicesBaseUrl);
                 var request = new RestRequest("/idps", Method.GET);
@@ -73,6 +74,29 @@ namespace AcsApi
                 else
                 {
                     RunOnMainThread(() => loginDelegate.ShowIdentityProviderSelector(identityProviders));
+                }
+            });
+        }
+
+        public void BeginPasswordFlow(string password)
+        {
+            configuration.Password = password;
+            RunOnBackgroundThread(() => {
+                try
+                {
+                    var apiClient = new AcsApiClient(configuration.ApiClientConfiguration, true);
+                    var uri = new Uri($"{ configuration.ServicesBaseUrl }/currentUser");
+                    _ = apiClient.GetAuthHeadersForRequestByType(uri.AbsoluteUri, "GET");
+
+                    RunOnMainThread(() => loginDelegate.Authenticated(apiClient));
+                }
+                catch (AcsApiException exception)
+                {
+                    RunOnMainThread(() => loginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
+                }
+                catch (Exception exception)
+                {
+                    RunOnMainThread(() => loginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
                 }
             });
         }
