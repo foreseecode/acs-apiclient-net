@@ -29,6 +29,8 @@ namespace AcsApi
         /// Used to inform the delegate of any errors encountered during the login flow.
         /// </summary>
         /// <param name="error">An AcsApiError describing the error that was encountered.</param>
-        void EncounteredError(AcsApiError error, string message, string code = "");
+        /// <param name="message">A message associated with the error</param>
+        /// <param name="code">The code associated with the error</param>
+        void EncounteredError(AcsApiError error, string message, int code = 0);
     }
 }

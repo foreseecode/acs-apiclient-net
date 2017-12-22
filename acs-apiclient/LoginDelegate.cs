@@ -35,7 +35,9 @@ namespace AcsApi
         /// Informs the delegate that an error was encountered during the login flow. This method should implement all 
         /// cases of errors in <c>AcsApiError</c>.
         /// </summary>
-        /// <param name="error">The error that was encountered.</param>
-        void EncounteredError(AcsApiError error, string message, string code = "");
+        /// <param name="error">An AcsApiError describing the error that was encountered.</param>
+        /// <param name="message">A message associated with the error</param>
+        /// <param name="code">The code associated with the error</param>
+        void EncounteredError(AcsApiError error, string message, int code = 0);
     }
 }

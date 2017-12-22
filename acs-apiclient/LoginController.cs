@@ -208,14 +208,14 @@ namespace AcsApi
             if (responseCode >= 500)
             {
                 RunOnMainThread(() => { 
-                    loginDelegate.EncounteredError(AcsApiError.ServerError, message, statusCode.ToString());
+                    loginDelegate.EncounteredError(AcsApiError.ServerError, message, responseCode);
                 });
                 return true;
             }
             if (responseCode >= 400)
             {
                 RunOnMainThread(() => {
-                    loginDelegate.EncounteredError(AcsApiError.ClientError, message, statusCode.ToString());
+                    loginDelegate.EncounteredError(AcsApiError.ClientError, message, responseCode);
                 });
                 return true;
             }
@@ -282,8 +282,11 @@ namespace AcsApi
         /// <summary>
         /// Passes an AcsApiError to the LoginDelegate.
         /// </summary>
-        /// <param name="error">Error.</param>
-        public void EncounteredError(AcsApiError error, string message, string code = "")
+        /// <param name="error">An AcsApiError describing the error that was encountered.</param>
+        /// <param name="message">A message associated with the error</param>
+        /// <param name="code">The code associated with the error</param>
+
+        public void EncounteredError(AcsApiError error, string message, int code = 0)
         {
             loginDelegate.EncounteredError(error, message, code);
         }

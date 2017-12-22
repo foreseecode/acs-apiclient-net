@@ -87,12 +87,12 @@ namespace AcsApi
         internal readonly string ConsumerSecret;
 
         /// <summary>
-        /// A token received upon authenticating
+        /// A token received upon completing the entire authentication flow
         /// </summary>
         public string OAuthToken { get; set; }
 
         /// <summary>
-        /// A secret received upon authenticating
+        /// A secret received upon completing the entire authentication flow
         /// </summary>
         public string OAuthSecret { get; set; }
 

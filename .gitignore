@@ -6,3 +6,4 @@ bin/
 acs-apiclient/bin
 acs-apiclient/obj
 packages/
+*.userprefs
