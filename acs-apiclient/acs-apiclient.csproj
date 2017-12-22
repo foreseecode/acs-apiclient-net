@@ -63,10 +63,14 @@
     <Compile Include="IAcsApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\IdentityProvider.cs" />
-    <Compile Include="Models\Consumer.cs" />
-    <Compile Include="FSRLoginController.cs" />
-    <Compile Include="FSRLoginConfiguration.cs" />
-    <Compile Include="FSRLoginDelegate.cs" />
+    <Compile Include="LoginController.cs" />
+    <Compile Include="LoginConfiguration.cs" />
+    <Compile Include="LoginDelegate.cs" />
+    <Compile Include="ExternalFlowDelegate.cs" />
+    <Compile Include="Errors.cs" />
+    <Compile Include="Models\LoginEnvironment.cs" />
+    <Compile Include="Models\TokenExchangeRequestBody.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OAuth\src\OAuth\OAuth.csproj">

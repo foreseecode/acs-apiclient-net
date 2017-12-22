@@ -87,14 +87,19 @@ namespace AcsApi
         internal readonly string ConsumerSecret;
 
         /// <summary>
-        /// Gets or sets the Access token
+        /// A token received upon completing the entire authentication flow
         /// </summary>
-        public string AccessToken { get; set; }
+        public string OAuthToken { get; set; }
 
         /// <summary>
-        /// Gets or sets the Access token secret
+        /// A secret received upon completing the entire authentication flow
         /// </summary>
-        public string AccessTokenSecret { get; set; }
+        public string OAuthSecret { get; set; }
+
+        /// <summary>
+        /// Determines if the AcsApiClient was created from the SSO Flow
+        /// </summary>
+        public bool IsSSOClient { get; internal set; } = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
@@ -114,8 +119,13 @@ namespace AcsApi
         /// <param name="portalPassword">
         /// The password for ACS portal services.
         /// </param>
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword)
-        {
+        internal AcsApiClientConfig(
+            string consumerKey, 
+            string consumerSecret, 
+            string serverRoot, 
+            string portalUsername = "", 
+            string portalPassword = ""
+        ) {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
             this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";

@@ -59,6 +59,29 @@ namespace AcsApi
         UnknownEndpoint,
 
         /// <summary>The remote server could not be reached.</summary>
-        ServerError
+        ServerUnreachable,
+
+        /// <summary>The remote server returned a server error response.</summary>
+        ServerError,
+
+        /// <summary>The login flow was interrupted by the user.</summary>
+        InterruptedByUser,
+
+        /// <summary>
+        /// Could not exchange the token during the login flow. This might have been due to the Identity Provider.
+        /// </summary>
+        CouldNotExchangeToken,
+
+        /// <summary>
+        /// The code provided by the Identity Provider is not valid, or the state returned by the Identity Provider 
+        /// does not match the one it received.
+        /// </summary>
+        InvalidCallbackParameters,
+
+        /// <summary>The remote server returned a client error response.</summary>
+        ClientError,
+
+        /// <summary>The other. This error is used when an exception is raised which doesn't match the errors.</summary>
+        Other
     }
 }

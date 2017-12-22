@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace AcsApi.Models
@@ -7,24 +8,36 @@ namespace AcsApi.Models
     public class IdentityProvider
     {
         [JsonProperty("identityProviderId")]
-        public string IdentityProviderId { get; set; }
+        internal string IdentityProviderId { get; set; }
 
         [JsonProperty("baseAuthRequestUrl")]
-        public string BaseAuthenticationRequestUrl { get; set; }
+        internal string BaseAuthenticationRequestUrl { get; set; }
 
         [JsonProperty("clientId")]
-        public string ClientId { get; set; }
+        internal string ClientId { get; set; }
 		
         [JsonProperty("clientName")]
         public string ClientName { get; set; }
 
         [JsonProperty("defaultParams")]
-        public string DefaultParameters { get; set; }
+        internal string DefaultParameters { get; set; }
 
         [JsonProperty("defaultRedirectUrl")]
-        public string DefaultRedirectUrl { get; set; }
+        internal string DefaultRedirectUrl { get; set; }
 		
         [JsonProperty("ssoEnabled")]
-		public bool IsSSOEnabled { get; set; }
+		internal bool IsSSOEnabled { get; set; }
+
+        [JsonIgnore]
+        internal string state { get; private set; }
+
+        [JsonIgnore]
+        public string UrlString => $"{ BaseAuthenticationRequestUrl.TrimEnd('/') }" +
+            $"?{ Utility.UrlEncode(DefaultParameters) }" +
+            $"&redirect_uri={ DefaultRedirectUrl }" +
+            $"&state={ state }";
+
+        [OnDeserialized]
+        internal void GenerateStateString(StreamingContext context) => state = Guid.NewGuid().ToString();
     }
 }
