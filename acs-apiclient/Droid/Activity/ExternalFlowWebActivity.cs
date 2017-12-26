@@ -4,16 +4,18 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Webkit;
-using acs_apiclient.Android.CustomViews;
+using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
+using Android.Graphics;
+using System.Drawing;
 
-namespace acs_apiclient.Android
+namespace acs_apiclient.Droid
 {
     [Activity(Label = "ExternalFlowWebActivity", Theme = "@android:style/Theme.NoTitleBar")]
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        
+        private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
         private WebView contentWebView;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -37,6 +39,7 @@ namespace acs_apiclient.Android
         private void SetupSyncButton()
         {
             EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_sync);
+            syncButton.SelectedTintColor = ObsidianGrey;
             syncButton.Click += (object sender, EventArgs e) => 
             {
                 //TODO implement behaviour after webview is setup
@@ -46,6 +49,7 @@ namespace acs_apiclient.Android
         private void SetupCloseButton()
         {
             EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_sync);
+            closeButton.SelectedTintColor = ObsidianGrey;
             closeButton.Click += (object sender, EventArgs e) => 
             {
                 Finish();

@@ -1,6 +1,6 @@
 ﻿using System;
 using Android.Content;
-using acs_apiclient.Android;
+using acs_apiclient.Droid;
 using Android.App;
 using Android.OS;
 using System.Threading;

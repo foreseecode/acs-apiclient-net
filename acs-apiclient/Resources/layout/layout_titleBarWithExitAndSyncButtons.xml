@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="15dp">
-    <acs_apiclient.Android.CustomViews.EasyTintImageButton
+    <acs_apiclient.Droid.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="17dp"
         android:textColor="@android:color/black" />
-    <Aacs_apiclient.Android.CustomViews.EasyTintImageButton
+    <Aacs_apiclient.Droid.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"

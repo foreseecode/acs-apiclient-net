@@ -2,7 +2,7 @@
 using Android.Graphics;
 using Android.Widget;
 
-namespace acs_apiclient.Android.CustomViews
+namespace acs_apiclient.Droid.CustomViews
 {
     public static class ImageViewExtension
     {

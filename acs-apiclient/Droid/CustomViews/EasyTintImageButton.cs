@@ -4,7 +4,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace acs_apiclient.Android.CustomViews
+namespace acs_apiclient.Droid.CustomViews
 {
     /**
     * This class exists because android:tint requires a minimum of Android level 21. However, we are required to support Android level 19

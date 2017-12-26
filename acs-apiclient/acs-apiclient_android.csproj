@@ -78,12 +78,12 @@
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\LoginEnvironment.cs" />
     <Compile Include="Models\TokenExchangeRequestBody.cs" />
-    <Compile Include="Android\LoginController.Android.cs" />
-    <Compile Include="Android\CustomViews\EasyTintImageButton.cs" />
-    <Compile Include="Android\Activity\ExternalFlowWebActivity.cs" />
-    <Compile Include="Android\CustomViews\DrawableExtension.cs" />
-    <Compile Include="Android\CustomViews\ImageViewExtension.cs" />
-    <Compile Include="Android\WebView\ExternalFlowWebViewClient.cs" />
+    <Compile Include="Droid\LoginController.Android.cs" />
+    <Compile Include="Droid\CustomViews\EasyTintImageButton.cs" />
+    <Compile Include="Droid\Activity\ExternalFlowWebActivity.cs" />
+    <Compile Include="Droid\CustomViews\DrawableExtension.cs" />
+    <Compile Include="Droid\CustomViews\ImageViewExtension.cs" />
+    <Compile Include="Droid\WebView\ExternalFlowWebViewClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -113,7 +113,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Android\" />
+    <Folder Include="Droid\" />
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-ldpi\" />
@@ -122,9 +122,9 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Android\CustomViews\" />
-    <Folder Include="Android\Activity\" />
-    <Folder Include="Android\WebView\" />
+    <Folder Include="Droid\CustomViews\" />
+    <Folder Include="Droid\Activity\" />
+    <Folder Include="Droid\WebView\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
