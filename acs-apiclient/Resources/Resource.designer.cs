@@ -37,6 +37,22 @@ namespace acs_apiclient
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public static int cloudy_blue = 2131034112;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -59,14 +75,14 @@ namespace acs_apiclient
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public static int easyTintImageButton_titlebarWithExitAndRefereshButtons_sync = 2131034113;
+			// aapt resource value: 0x7f060001
+			public static int easyTintImageButton_titlebarWithExitAndRefereshButtons_sync = 2131099649;
 			
-			// aapt resource value: 0x7f050000
-			public static int linearlayout_externalFlowWeb_root = 2131034112;
+			// aapt resource value: 0x7f060000
+			public static int linearlayout_externalFlowWeb_root = 2131099648;
 			
-			// aapt resource value: 0x7f050002
-			public static int textview_toolbarContainer_title = 2131034114;
+			// aapt resource value: 0x7f060002
+			public static int textview_toolbarContainer_title = 2131099650;
 			
 			static Id()
 			{
