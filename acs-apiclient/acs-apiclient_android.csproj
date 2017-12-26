@@ -92,7 +92,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\layout\activity_externalFlowWeb.xml" />
     <AndroidResource Include="Resources\values\Styles.xml" />
-    <AndroidResource Include="Resources\layout\layout_titleBarWithExitAndRefreshButtons.xml" />
+    <AndroidResource Include="Resources\layout\layout_titleBarWithExitAndSyncButtons.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_close_black_36dp.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_close_black_36dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_close_black_36dp.png" />

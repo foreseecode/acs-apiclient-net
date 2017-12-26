@@ -10,7 +10,7 @@
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/ic_sync_black_36dp" />
     <TextView
         android:id="@+id/textview_toolbarContainer_title"
