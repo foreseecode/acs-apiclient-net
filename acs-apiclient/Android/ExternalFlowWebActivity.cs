@@ -16,6 +16,8 @@ namespace acs_apiclient.Android
     [Activity(Label = "ExternalFlowWebActivity")]
     public class ExternalFlowWebActivity : Activity
     {
+        public static string UrlParamKey = "url";
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
