@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp">
+    <acs_apiclient.CustomViews.EasyTintImageButton
+        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_sync_black_36dp" />
+    <TextView
+        android:id="@+id/textview_toolbarContainer_title"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:text="login.okta.com"
+        android:textColor="@color/dark" />
+    <Aacs_apiclient.CustomViews.EasyTintImageButton
+        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
+        android:layout_width="17.5dp"
+        android:layout_height="17.5dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_sync_black_36dp" />
+</RelativeLayout>

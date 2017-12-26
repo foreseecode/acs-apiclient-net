@@ -11,9 +11,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace acs_apiclient.Android
+namespace acs_apiclient.Android.Activity
 {
-    [Activity(Label = "ExternalFlowWebActivity")]
+    [Activity(Label = "ExternalFlowWebActivity",
+    Theme = "@style/AnswersTheme.NoStatusBar")]
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
@@ -21,9 +22,7 @@ namespace acs_apiclient.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //TODO add the webview here
             
-            //TODO add reference to LoginController
         }
     }
 }
