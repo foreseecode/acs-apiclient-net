@@ -1,12 +1,10 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Graphics.Drawables;
 
-namespace acs_apiclient.CustomViews
+namespace acs_apiclient.Android.CustomViews
 {
     /**
     * This class exists because android:tint requires a minimum of Android level 21. However, we are required to support Android level 19
@@ -31,11 +29,6 @@ namespace acs_apiclient.CustomViews
         }
 
         public EasyTintImageButton(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
-        {
-            Init();
-        }
-
-        public EasyTintImageButton(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Init();
         }

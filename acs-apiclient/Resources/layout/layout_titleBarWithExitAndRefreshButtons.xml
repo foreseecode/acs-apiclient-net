@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="15dp"
     android:layout_marginLeft="15dp">
-    <acs_apiclient.CustomViews.EasyTintImageButton
+    <acs_apiclient.Android.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:textSize="17dp"
         android:text="login.okta.com"
-        android:textColor="@color/dark" />
-    <Aacs_apiclient.CustomViews.EasyTintImageButton
+        android:textColor="@android:color/black" />
+    <Aacs_apiclient.Android.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
