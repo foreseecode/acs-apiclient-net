@@ -18,7 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17dp"
-        android:text="login.okta.com"
         android:textColor="@android:color/black" />
     <Aacs_apiclient.Android.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
