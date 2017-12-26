@@ -75,14 +75,17 @@ namespace acs_apiclient
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060001
-			public static int easyTintImageButton_titlebarWithExitAndRefereshButtons_sync = 2131099649;
+			// aapt resource value: 0x7f060002
+			public static int easyTintImageButton_titlebarWithExitAndRefereshButtons_sync = 2131099650;
 			
 			// aapt resource value: 0x7f060000
 			public static int linearlayout_externalFlowWeb_root = 2131099648;
 			
-			// aapt resource value: 0x7f060002
-			public static int textview_toolbarContainer_title = 2131099650;
+			// aapt resource value: 0x7f060003
+			public static int textview_toolbarContainer_title = 2131099651;
+			
+			// aapt resource value: 0x7f060001
+			public static int webview_externalFlowWeb_content = 2131099649;
 			
 			static Id()
 			{
