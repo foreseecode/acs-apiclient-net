@@ -17,14 +17,15 @@ namespace acs_apiclient.Droid
         public static string UrlParamKey = "url";
         private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
         private WebView contentWebView;
+        private String url;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
-            String title = savedInstanceState.GetString(UrlParamKey);
-            SetupTitle(title);
+            url = savedInstanceState.GetString(UrlParamKey);
+            SetupTitle(url);
             SetupCloseButton();
             SetupSyncButton();
             SetupWebView();
@@ -42,7 +43,7 @@ namespace acs_apiclient.Droid
             syncButton.SelectedTintColor = ObsidianGrey;
             syncButton.Click += (object sender, EventArgs e) => 
             {
-                //TODO implement behaviour after webview is setup
+                this.contentWebView.LoadUrl(this.url);
             };
         }
 
@@ -52,6 +53,7 @@ namespace acs_apiclient.Droid
             closeButton.SelectedTintColor = ObsidianGrey;
             closeButton.Click += (object sender, EventArgs e) => 
             {
+                //webViewLoginDelegate.UserCancelledLogin(); //TODO need to investigate a way to do this
                 Finish();
             };
         }
