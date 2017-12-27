@@ -6,10 +6,6 @@ using Android.Views;
 using Android.Webkit;
 using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
-using Android.Graphics;
-using System.Drawing;
-using AcsApi;
-using Android.Content;
 
 namespace acs_apiclient.Droid
 {
@@ -41,6 +37,7 @@ namespace acs_apiclient.Droid
             {
                 throw new ArgumentException($"'url' must be provided to start {typeof(ExternalFlowWebActivity)}");
             }
+            this.uri = Android.Net.Uri.Parse(this.urlString);
         }
 
         private void SetupTitle(string newTitle)
@@ -61,7 +58,7 @@ namespace acs_apiclient.Droid
 
         private void SetupCloseButton()
         {
-            EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_sync);
+            EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_close);
             closeButton.SelectedTintColor = ObsidianGrey;
             closeButton.Click += (object sender, EventArgs e) => 
             {
