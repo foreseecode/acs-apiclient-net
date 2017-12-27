@@ -9,6 +9,7 @@ using Android.Widget;
 using Android.Graphics;
 using System.Drawing;
 using AcsApi;
+using Android.Content;
 
 namespace acs_apiclient.Droid
 {
@@ -16,7 +17,6 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        public static string DelegateParamKey = "ExternalFlowDelegate";
         private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
         private WebView contentWebView;
         private String url;
@@ -27,8 +27,7 @@ namespace acs_apiclient.Droid
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
-            url = savedInstanceState.GetString(UrlParamKey);
-            externalFlowDelegate = (AcsApi.ExternalFlowDelegate)savedInstanceState.GetParcelable(DelegateParamKey);
+            this.url = this.Intent.GetStringExtra(UrlParamKey);
             
             SetupTitle(url);
             SetupCloseButton();
