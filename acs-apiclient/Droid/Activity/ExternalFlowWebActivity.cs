@@ -19,20 +19,28 @@ namespace acs_apiclient.Droid
         public static string UrlParamKey = "url";
         private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
         private WebView contentWebView;
-        private String url;
-        private ExternalFlowDelegate externalFlowDelegate;
+        private String urlString;
+        private Android.Net.Uri uri;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
-            this.url = this.Intent.GetStringExtra(UrlParamKey);
-            
-            SetupTitle(url);
+            InitUri();
+            SetupTitle(uri.Host);
             SetupCloseButton();
             SetupSyncButton();
             SetupWebView();
+        }
+
+        private void InitUri()
+        {
+            this.urlString = this.Intent.GetStringExtra(UrlParamKey);
+            if (String.IsNullOrEmpty(this.urlString))
+            {
+                throw new ArgumentException($"'url' must be provided to start {typeof(ExternalFlowWebActivity)}");
+            }
         }
 
         private void SetupTitle(string newTitle)
@@ -47,7 +55,7 @@ namespace acs_apiclient.Droid
             syncButton.SelectedTintColor = ObsidianGrey;
             syncButton.Click += (object sender, EventArgs e) => 
             {
-                this.contentWebView.LoadUrl(this.url);
+                this.contentWebView.LoadUrl(this.urlString);
             };
         }
 
@@ -57,17 +65,17 @@ namespace acs_apiclient.Droid
             closeButton.SelectedTintColor = ObsidianGrey;
             closeButton.Click += (object sender, EventArgs e) => 
             {
-                externalFlowDelegate.UserCancelledLogin();
+                //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
                 Finish();
             };
         }
 
         private void SetupWebView()
         {
-            contentWebView = FindViewById<WebView>(Resource.Id.webview_externalFlowWeb_content);
-            contentWebView.Settings.JavaScriptEnabled = true;
-            contentWebView.SetWebViewClient(new ExternalFlowWebViewClient());
-            contentWebView.LoadUrl("http://www.google.com");
+            this.contentWebView = FindViewById<WebView>(Resource.Id.webview_externalFlowWeb_content);
+            this.contentWebView.Settings.JavaScriptEnabled = true;
+            this.contentWebView.SetWebViewClient(new ExternalFlowWebViewClient());
+            this.contentWebView.LoadUrl(this.urlString);
         }
     }
 }
