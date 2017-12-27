@@ -10,6 +10,7 @@
         android:layout_height="17.5dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
         android:background="@drawable/ic_close_black_36dp" />
     <TextView
         android:id="@+id/textview_titlebarWithExitAndRefreshButtons_title"
@@ -25,5 +26,6 @@
         android:layout_height="17.5dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
         android:background="@drawable/ic_sync_black_36dp" />
 </RelativeLayout>

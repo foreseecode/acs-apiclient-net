@@ -13,7 +13,7 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
+        private static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor("#006CB4");
         private WebView contentWebView;
         private String urlString;
         private Android.Net.Uri uri;
@@ -49,21 +49,27 @@ namespace acs_apiclient.Droid
         private void SetupSyncButton()
         {
             EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_sync);
-            syncButton.SelectedTintColor = ObsidianGrey;
-            syncButton.Click += (sender, e) => 
+            syncButton.SelectedTintColor = SelectedButtonTintColor;
+            syncButton.Touch += (object sender, View.TouchEventArgs e) => 
             {
-                this.contentWebView.LoadUrl(this.urlString);
+                if(e.Event.Action == MotionEventActions.Down)
+                {
+                    this.contentWebView.LoadUrl(this.urlString);
+                }
             };
         }
 
         private void SetupCloseButton()
         {
             EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_close);
-            closeButton.SelectedTintColor = ObsidianGrey;
-            closeButton.Click += (sender, e) => 
+            closeButton.SelectedTintColor = SelectedButtonTintColor;
+            closeButton.Touch += (object sender, View.TouchEventArgs e) => 
             {
-                //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
-                Finish();
+                if(e.Event.Action == MotionEventActions.Down)
+                {
+                    //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
+                    Finish();
+                }
             };
         }
 
