@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:padding="15dp">
     <acs_apiclient.Droid.CustomViews.EasyTintImageButton
-        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_close"
+        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefreshButtons_close"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/ic_close_black_36dp" />
     <TextView
-        android:id="@+id/textview_toolbarContainer_title"
+        android:id="@+id/textview_titlebarWithExitAndRefreshButtons_title"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         android:textSize="17dp"
         android:textColor="@android:color/black" />
     <acs_apiclient.Droid.CustomViews.EasyTintImageButton
-        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefereshButtons_sync"
+        android:id="@+id/easyTintImageButton_titlebarWithExitAndRefreshButtons_sync"
         android:layout_width="17.5dp"
         android:layout_height="17.5dp"
         android:layout_centerVertical="true"

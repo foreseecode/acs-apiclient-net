@@ -35,22 +35,22 @@ namespace acs_apiclient.Droid
             this.urlString = this.Intent.GetStringExtra(UrlParamKey);
             if (String.IsNullOrEmpty(this.urlString))
             {
-                throw new ArgumentException($"'url' must be provided to start {typeof(ExternalFlowWebActivity)}");
+                throw new ArgumentException($"'url' must be provided in the Intent to start {typeof(ExternalFlowWebActivity)}");
             }
             this.uri = Android.Net.Uri.Parse(this.urlString);
         }
 
         private void SetupTitle(string newTitle)
         {
-            TextView title = FindViewById<TextView>(Resource.Id.textview_toolbarContainer_title);
+            TextView title = FindViewById<TextView>(Resource.Id.textview_titlebarWithExitAndRefreshButtons_title);
             title.Text = newTitle;
         }
 
         private void SetupSyncButton()
         {
-            EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_sync);
+            EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_sync);
             syncButton.SelectedTintColor = ObsidianGrey;
-            syncButton.Click += (object sender, EventArgs e) => 
+            syncButton.Click += (sender, e) => 
             {
                 this.contentWebView.LoadUrl(this.urlString);
             };
@@ -58,9 +58,9 @@ namespace acs_apiclient.Droid
 
         private void SetupCloseButton()
         {
-            EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefereshButtons_close);
+            EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_close);
             closeButton.SelectedTintColor = ObsidianGrey;
-            closeButton.Click += (object sender, EventArgs e) => 
+            closeButton.Click += (sender, e) => 
             {
                 //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
                 Finish();
