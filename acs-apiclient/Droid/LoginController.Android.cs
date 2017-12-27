@@ -9,27 +9,26 @@ using Android.Runtime;
 
 namespace AcsApi
 {
-    public partial class LoginController : IParcelable
+    public partial class LoginController
     {
         public override void BeginLoginFlow<T>(T context, Models.IdentityProvider identityProvider)
         {
-            if (!(context is Context))
+            if (!(context is Activity))
             {
                 throw new ArgumentException(
-                    $"{ typeof(T) } is not implemented, please make sure you are using a Context for the " +
+                    $"{ typeof(T) } is not implemented, please make sure you are using a Activity for the " +
                     "context parameter."
                 );
             }
 
-            var loginFlowContext = context as Context;
+            var loginActivity = context as Activity;
             selectedIdentityProvider = identityProvider;
 
             if (identityProvider.IsSSOEnabled)
             {
-                var webActivity = new Intent(loginFlowContext, typeof(ExternalFlowWebActivity));
-                webActivity.PutExtra(ExternalFlowWebActivity.UrlParamKey, identityProvider.UrlString);
-                webActivity.PutExtra(ExternalFlowWebActivity.DelegateParamKey, this);
-                loginFlowContext.StartActivity(webActivity);
+                var webViewActivityIntent = new Intent(loginActivity, typeof(ExternalFlowWebActivity));
+                webViewActivityIntent.PutExtra(ExternalFlowWebActivity.UrlParamKey, identityProvider.UrlString);
+                loginActivity.StartActivity(webViewActivityIntent);
             }
             else
             {
@@ -46,30 +45,6 @@ namespace AcsApi
         protected override void RunOnBackgroundThread(Action action)
         {
             ThreadPool.QueueUserWorkItem(calback => action());
-        }
-        
-        IntPtr IJavaObject.Handle => throw new NotImplementedException();
-
-        public int DescribeContents()
-        {
-            return 0;
-        }
-
-        public void Dispose()
-        {
-        }
-
-        public void WriteToParcel(Parcel dest, [GeneratedEnum] ParcelableWriteFlags flags)
-        {
-        }
-
-        int IParcelable.DescribeContents()
-        {
-            return 0;
-        }
-
-        void IParcelable.WriteToParcel(Parcel dest, ParcelableWriteFlags flags)
-        {
         }
     }
 }
