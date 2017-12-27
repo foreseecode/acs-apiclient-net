@@ -8,6 +8,7 @@ using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
 using Android.Graphics;
 using System.Drawing;
+using AcsApi;
 
 namespace acs_apiclient.Droid
 {
@@ -15,9 +16,11 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
+        public static string DelegateParamKey = "ExternalFlowDelegate";
         private static Android.Graphics.Color ObsidianGrey = Android.Graphics.Color.ParseColor("#222b3c");
         private WebView contentWebView;
         private String url;
+        private ExternalFlowDelegate externalFlowDelegate;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,6 +28,8 @@ namespace acs_apiclient.Droid
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
             url = savedInstanceState.GetString(UrlParamKey);
+            externalFlowDelegate = (AcsApi.ExternalFlowDelegate)savedInstanceState.GetParcelable(DelegateParamKey);
+            
             SetupTitle(url);
             SetupCloseButton();
             SetupSyncButton();
@@ -53,7 +58,7 @@ namespace acs_apiclient.Droid
             closeButton.SelectedTintColor = ObsidianGrey;
             closeButton.Click += (object sender, EventArgs e) => 
             {
-                //webViewLoginDelegate.UserCancelledLogin(); //TODO need to investigate a way to do this
+                externalFlowDelegate.UserCancelledLogin();
                 Finish();
             };
         }
