@@ -56,7 +56,8 @@ namespace acs_apiclient.Droid
             syncButton.UnSelectedTintColor = UnselectedButtonTintColor;
             syncButton.Click += (object sender, EventArgs e) => 
             {
-                this.contentWebView.LoadUrl(this.urlString);
+                //this.contentWebView.LoadUrl(this.urlString);
+                this.contentWebView.LoadUrl("https://www.google.ca");
             };
         }
 
