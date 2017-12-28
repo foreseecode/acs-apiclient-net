@@ -50,27 +50,36 @@ namespace acs_apiclient.Droid
         {
             EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_sync);
             syncButton.SelectedTintColor = SelectedButtonTintColor;
-            syncButton.Touch += (object sender, View.TouchEventArgs e) => 
+            syncButton.Click += (object sender, EventArgs e) => 
             {
-                if(e.Event.Action == MotionEventActions.Down)
-                {
-                    this.contentWebView.LoadUrl(this.urlString);
-                }
+                this.contentWebView.LoadUrl(this.urlString);
             };
+            //syncButton.Touch += (object sender, View.TouchEventArgs e) => 
+            //{
+            //    if(e.Event.Action == MotionEventActions.Down)
+            //    {
+            //        this.contentWebView.LoadUrl(this.urlString);
+            //    }
+            //};
         }
 
         private void SetupCloseButton()
         {
             EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_close);
             closeButton.SelectedTintColor = SelectedButtonTintColor;
-            closeButton.Touch += (object sender, View.TouchEventArgs e) => 
+            closeButton.Click += (object sender, EventArgs e) => 
             {
-                if(e.Event.Action == MotionEventActions.Down)
-                {
-                    //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
-                    Finish();
-                }
+                //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
+                Finish();
             };
+            //closeButton.Touch += (object sender, View.TouchEventArgs e) => 
+            //{
+            //    if(e.Event.Action == MotionEventActions.Down)
+            //    {
+            //        //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
+            //        Finish();
+            //    }
+            //};
         }
 
         private void SetupWebView()

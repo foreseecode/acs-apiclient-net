@@ -72,6 +72,7 @@ namespace acs_apiclient.Droid.CustomViews
         private void Init()
         {
             base.SetOnTouchListener(new ToggleOnSelectedListener());
+            base.Clickable = true;
         }
 
         private void AdjustTintToSelection()
@@ -80,7 +81,7 @@ namespace acs_apiclient.Droid.CustomViews
             this.Background.AdjustColorFilter(newColor);
         }
         
-        public class ToggleOnSelectedListener : Java.Lang.Object,View.IOnTouchListener {
+        public class ToggleOnSelectedListener : Java.Lang.Object, View.IOnTouchListener {
 
             public bool OnTouch(View view, MotionEvent motionEvent)
             {
@@ -92,6 +93,11 @@ namespace acs_apiclient.Droid.CustomViews
     
                 EasyTintImageButton button = view as EasyTintImageButton;
                 button.Selected = (motionEvent.Action == MotionEventActions.Down);
+                
+                if(motionEvent.Action == MotionEventActions.Up)
+                {
+                    button.PerformClick();
+                }
                 
                 if(button.touchListenerFromCaller == null)
                 {
