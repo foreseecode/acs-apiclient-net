@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <color name="cloudy_blue">#B7C0CC</color>
+    <color name="ash">#B7C0CC</color>
+    <color name="obsidian">#222b3c</color>
 </resources>

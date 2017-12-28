@@ -40,8 +40,14 @@ namespace acs_apiclient
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f050001
+			public static int ash = 2131034113;
+			
 			// aapt resource value: 0x7f050000
 			public static int cloudy_blue = 2131034112;
+			
+			// aapt resource value: 0x7f050002
+			public static int obsidian = 2131034114;
 			
 			static Color()
 			{

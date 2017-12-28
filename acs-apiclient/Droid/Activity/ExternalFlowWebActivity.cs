@@ -13,7 +13,10 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        private static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor("#006CB4");
+        private static Android.Graphics.Color Obsidian = Android.Graphics.Color.ParseColor("#222b3c");
+        private static Android.Graphics.Color Ash = Android.Graphics.Color.ParseColor("#B7C0CC");
+        private static Android.Graphics.Color SelectedButtonTintColor = Ash;
+        private static Android.Graphics.Color UnselectedButtonTintColor = Obsidian;
         private WebView contentWebView;
         private String urlString;
         private Android.Net.Uri uri;
@@ -50,36 +53,23 @@ namespace acs_apiclient.Droid
         {
             EasyTintImageButton syncButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_sync);
             syncButton.SelectedTintColor = SelectedButtonTintColor;
+            syncButton.UnSelectedTintColor = UnselectedButtonTintColor;
             syncButton.Click += (object sender, EventArgs e) => 
             {
                 this.contentWebView.LoadUrl(this.urlString);
             };
-            //syncButton.Touch += (object sender, View.TouchEventArgs e) => 
-            //{
-            //    if(e.Event.Action == MotionEventActions.Down)
-            //    {
-            //        this.contentWebView.LoadUrl(this.urlString);
-            //    }
-            //};
         }
 
         private void SetupCloseButton()
         {
             EasyTintImageButton closeButton = FindViewById<EasyTintImageButton>(Resource.Id.easyTintImageButton_titlebarWithExitAndRefreshButtons_close);
             closeButton.SelectedTintColor = SelectedButtonTintColor;
+            closeButton.UnSelectedTintColor = UnselectedButtonTintColor;
             closeButton.Click += (object sender, EventArgs e) => 
             {
                 //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
                 Finish();
             };
-            //closeButton.Touch += (object sender, View.TouchEventArgs e) => 
-            //{
-            //    if(e.Event.Action == MotionEventActions.Down)
-            //    {
-            //        //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
-            //        Finish();
-            //    }
-            //};
         }
 
         private void SetupWebView()

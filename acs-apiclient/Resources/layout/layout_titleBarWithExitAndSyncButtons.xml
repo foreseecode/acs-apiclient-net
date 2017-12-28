@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17dp"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/obsidian" />
     <acs_apiclient.Droid.CustomViews.EasyTintImageButton
         android:id="@+id/easyTintImageButton_titlebarWithExitAndRefreshButtons_sync"
         android:layout_width="17.5dp"
