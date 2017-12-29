@@ -69,7 +69,7 @@ namespace acs_apiclient.Droid
             closeButton.UnSelectedTintColor = UnselectedButtonTintColor;
             closeButton.Click += (object sender, EventArgs e) => 
             {
-                //externalFlowDelegate.UserCancelledLogin();//TODO need to determine how to do this
+                LoginController.Instance.UserCancelledLogin();
                 Finish();
             };
         }
@@ -92,63 +92,19 @@ namespace acs_apiclient.Droid
             
             public override bool ShouldOverrideUrlLoading(WebView webview, string url)
             {
-
-                //// try
-                ////{
-                ////    InvokeInBackground(() => {
-                ////        if (webViewLoginDelegate.ShouldInterceptRequest(navigationAction.Request.Url.AbsoluteString))
-                ////        {
-                ////            InvokeOnMainThread(() => {
-                ////                decisionHandler(WKNavigationActionPolicy.Cancel);
-                ////                DismissViewController(true, () => {
-                ////                    InvokeInBackground(() => {
-                ////                        webViewLoginDelegate.RetrievedAuthCode();    
-                ////                    });
-                ////                });
-                ////            });
-                ////        }
-                ////        else
-                ////        {
-                ////            InvokeOnMainThread(() => decisionHandler(WKNavigationActionPolicy.Allow));
-                ////        } 
-                ////    });
-                ////}
-                ////catch (AcsApiException exception)
-                ////{
-                ////    InvokeOnMainThread(() => webViewLoginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
-                ////}
-                ////catch (Exception exception)
-                ////{
-                ////    InvokeOnMainThread(() => webViewLoginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
-                ////}
-                bool shouldOverrideLoading = false;
+                bool shouldOverrideUrl = false;
                 try
                 {
-                    ThreadPool.QueueUserWorkItem ((object state) => {
-                        if (LoginController.Instance.ShouldInterceptRequest(url))
+                    if (LoginController.Instance.ShouldInterceptRequest(url))
+                    {
+                        ThreadPool.QueueUserWorkItem((object state) =>
                         {
-                            var handlerOnMainThread = new Handler(Looper.MainLooper);
-                            handlerOnMainThread.Post(() => 
-                            {
-                                shouldOverrideLoading = true; //TODO need to test. assumed equivalent to decisionHandler(WKNavigationActionPolicy.Cancel);
-                                ThreadPool.QueueUserWorkItem((object state2) =>
-                                {
-                                    LoginController.Instance.RetrievedAuthCode();
-                                });
-    
-                                this.activity.Finish();
-                            });
-                        }
-    //                    else
-    //                    {
-    //                        var handlerOnMainThread = new Handler(Looper.MainLooper);
-    //                        handlerOnMainThread.Post(() =>
-    //                        {
-    //                            //do nothing
-    //                        });
-                            
-    //)                   }
-                    });
+                            LoginController.Instance.RetrievedAuthCode();
+                        });
+                        
+                        this.activity.Finish();
+                        shouldOverrideUrl = true;
+                    }
                 }
                 catch (AcsApiException exception)
                 {
@@ -158,8 +114,8 @@ namespace acs_apiclient.Droid
                 {
                     this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
                 }
-
-                return shouldOverrideLoading;
+                
+                return shouldOverrideUrl; 
             }       
         }
     }
