@@ -12,7 +12,9 @@ using Android.Graphics;
 
 namespace acs_apiclient.Droid
 {
-    [Activity(Label = "ExternalFlowWebActivity", Theme = "@android:style/Theme.NoTitleBar")]
+    [Activity(Label = "ExternalFlowWebActivity", 
+    Theme = "@android:style/Theme.NoTitleBar", 
+    WindowSoftInputMode = SoftInput.AdjustResize)]
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
@@ -27,7 +29,6 @@ namespace acs_apiclient.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
             InitUri();
             SetupTitle(uri.Host);
