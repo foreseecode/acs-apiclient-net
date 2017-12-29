@@ -8,6 +8,7 @@ using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
 using System.Threading;
 using AcsApi;
+using Android.Graphics;
 
 namespace acs_apiclient.Droid
 {
@@ -85,38 +86,49 @@ namespace acs_apiclient.Droid
         public class ExternalFlowWebViewClient : WebViewClient
         {
             Activity activity;
+            private string pendingUrl;
+
             public ExternalFlowWebViewClient(Activity activity)
             {
                 this.activity = activity;
             }
             
-            public override bool ShouldOverrideUrlLoading(WebView webview, string url)
+            public override void OnPageStarted(WebView view, String url, Bitmap favicon)
             {
-                bool shouldOverrideUrl = false;
-                try
+                if (pendingUrl == null) {
+                    pendingUrl = url;
+                }
+            }
+            
+            public override void OnPageFinished(WebView view, String url)
+            {
+                bool urlRedirectDetected = !url.Equals(pendingUrl);
+                if (urlRedirectDetected) 
                 {
-                    if (LoginController.Instance.ShouldInterceptRequest(url))
+                    try
                     {
-                        ThreadPool.QueueUserWorkItem((object state) =>
+                        if (LoginController.Instance.ShouldInterceptRequest(url))
                         {
-                            LoginController.Instance.RetrievedAuthCode();
-                        });
-                        
-                        this.activity.Finish();
-                        shouldOverrideUrl = true;
+                            ThreadPool.QueueUserWorkItem((object state) =>
+                            {
+                                LoginController.Instance.RetrievedAuthCode();
+                            });
+                            
+                            this.activity.Finish();
+                        }
                     }
+                    catch (AcsApiException exception)
+                    {
+                        this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(exception.ErrorCode, exception.Message));
+                    }
+                    catch (Exception exception)
+                    {
+                        this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
+                    }
+                    
+                    pendingUrl = null;
                 }
-                catch (AcsApiException exception)
-                {
-                    this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(exception.ErrorCode, exception.Message));
-                }
-                catch (Exception exception)
-                {
-                    this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
-                }
-                
-                return shouldOverrideUrl; 
-            }       
+            }                  
         }
     }
 }
