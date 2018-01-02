@@ -80,6 +80,7 @@ namespace acs_apiclient.Droid
         {
             this.contentWebView = FindViewById<WebView>(Resource.Id.webview_externalFlowWeb_content);
             this.contentWebView.Settings.JavaScriptEnabled = true;
+            this.contentWebView.Settings.DomStorageEnabled = true;
             this.contentWebView.SetWebViewClient(new ExternalFlowWebViewClient(this));
             this.contentWebView.LoadUrl(this.urlString);
         }
