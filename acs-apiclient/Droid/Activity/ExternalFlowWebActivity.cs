@@ -88,49 +88,37 @@ namespace acs_apiclient.Droid
         public class ExternalFlowWebViewClient : WebViewClient
         {
             Activity activity;
-            private string pendingUrl;
 
             public ExternalFlowWebViewClient(Activity activity)
             {
                 this.activity = activity;
             }
-            
+
             public override void OnPageStarted(WebView view, String url, Bitmap favicon)
             {
-                if (pendingUrl == null) {
-                    pendingUrl = url;
-                }
-            }
-            
-            public override void OnPageFinished(WebView view, String url)
-            {
-                bool urlRedirectDetected = !url.Equals(pendingUrl);
-                if (urlRedirectDetected) 
+                Console.WriteLine($"OnPageStarted: url={url}");
+
+                try
                 {
-                    try
+                    if (LoginController.Instance.ShouldInterceptRequest(url))
                     {
-                        if (LoginController.Instance.ShouldInterceptRequest(url))
+                        ThreadPool.QueueUserWorkItem((object state) =>
                         {
-                            ThreadPool.QueueUserWorkItem((object state) =>
-                            {
-                                LoginController.Instance.RetrievedAuthCode();
-                            });
-                            
-                            this.activity.Finish();
-                        }
+                            LoginController.Instance.RetrievedAuthCode();
+                        });
+                        
+                        this.activity.Finish();
                     }
-                    catch (AcsApiException exception)
-                    {
-                        this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(exception.ErrorCode, exception.Message));
-                    }
-                    catch (Exception exception)
-                    {
-                        this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
-                    }
-                    
-                    pendingUrl = null;
                 }
-            }                  
+                catch (AcsApiException exception)
+                {
+                    this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(exception.ErrorCode, exception.Message));
+                }
+                catch (Exception exception)
+                {
+                    this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
+                }
+            }                
         }
     }
 }
