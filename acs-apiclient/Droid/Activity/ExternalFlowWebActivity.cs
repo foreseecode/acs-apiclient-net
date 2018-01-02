@@ -93,20 +93,20 @@ namespace acs_apiclient.Droid
             {
                 this.activity = activity;
             }
-
-            public override void OnPageStarted(WebView view, String url, Bitmap favicon)
+            
+            public override bool ShouldOverrideUrlLoading(WebView webview, IWebResourceRequest request)
             {
-                Console.WriteLine($"OnPageStarted: url={url}");
-
+                Console.WriteLine($"ShouldOverrideUrlLoading: url={request.Url.ToString()}");
+                bool shouldOverrideUrl = false;
                 try
                 {
-                    if (LoginController.Instance.ShouldInterceptRequest(url))
+                    if (LoginController.Instance.ShouldInterceptRequest(request.Url.ToString()))
                     {
                         ThreadPool.QueueUserWorkItem((object state) =>
                         {
                             LoginController.Instance.RetrievedAuthCode();
                         });
-                        
+                        shouldOverrideUrl = true;
                         this.activity.Finish();
                     }
                 }
@@ -118,6 +118,8 @@ namespace acs_apiclient.Droid
                 {
                     this.activity.RunOnUiThread(() => LoginController.Instance.EncounteredError(AcsApiError.Other, exception.Message));
                 }
+
+                return shouldOverrideUrl;
             }                
         }
     }
