@@ -94,13 +94,17 @@ namespace acs_apiclient.Droid
                 this.activity = activity;
             }
             
-            public override bool ShouldOverrideUrlLoading(WebView webview, IWebResourceRequest request)
+            /**
+            * Use shouldOverrideUrlLoading(WebView, WebResourceRequest) instead when the Android app's min SDK is increased to >= 24
+            * https://developer.android.com/reference/android/webkit/WebViewClient.html#shouldOverrideUrlLoading(android.webkit.WebView, android.webkit.WebResourceRequest)
+            */
+            public override bool ShouldOverrideUrlLoading(WebView webview, String url)
             {
-                Console.WriteLine($"ShouldOverrideUrlLoading: url={request.Url.ToString()}");
+                Console.WriteLine($"ShouldOverrideUrlLoading: url={url}");
                 bool shouldOverrideUrl = false;
                 try
                 {
-                    if (LoginController.Instance.ShouldInterceptRequest(request.Url.ToString()))
+                    if (LoginController.Instance.ShouldInterceptRequest(url))
                     {
                         ThreadPool.QueueUserWorkItem((object state) =>
                         {
