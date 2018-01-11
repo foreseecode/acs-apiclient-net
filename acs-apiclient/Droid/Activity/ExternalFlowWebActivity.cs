@@ -7,6 +7,7 @@ using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
 using System.Threading;
 using AcsApi;
+using Android.Graphics;
 
 namespace acs_apiclient.Droid
 {
@@ -16,8 +17,8 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Ash);
-        static Android.Graphics.Color UnselectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Obsidian);
+        static Color SelectedButtonTintColor = Color.ParseColor(Colors.Ash);
+        static Color UnselectedButtonTintColor = Color.ParseColor(Colors.Obsidian);        
         WebView contentWebView;
         String urlString;
         Android.Net.Uri uri;
@@ -28,9 +29,17 @@ namespace acs_apiclient.Droid
             this.SetContentView(Resource.Layout.activity_externalFlowWeb);
             InitUri();
             SetupTitle(uri.Host);
+            SetupBorder();
             SetupCloseButton();
             SetupSyncButton();
             SetupWebView();
+        }
+
+        private void SetupBorder()
+        {
+            View border = FindViewById<View>(Resource.Id.view_externalFlowWeb_border);
+            Color borderColor = Color.ParseColor(Colors.Ash);
+            border.SetBackgroundColor(borderColor);
         }
 
         private void InitUri()
@@ -46,7 +55,9 @@ namespace acs_apiclient.Droid
         private void SetupTitle(string newTitle)
         {
             TextView title = FindViewById<TextView>(Resource.Id.textview_titlebarWithExitAndRefreshButtons_title);
+            Color textColor = Color.ParseColor(Colors.Obsidian);
             title.Text = newTitle;
+            title.SetTextColor(textColor);
         }
 
         private void SetupSyncButton()
