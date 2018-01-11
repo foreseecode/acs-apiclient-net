@@ -16,11 +16,11 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        private static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Ash);
-        private static Android.Graphics.Color UnselectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Obsidian);
-        private WebView contentWebView;
-        private String urlString;
-        private Android.Net.Uri uri;
+        static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Ash);
+        static Android.Graphics.Color UnselectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Obsidian);
+        WebView contentWebView;
+        String urlString;
+        Android.Net.Uri uri;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
