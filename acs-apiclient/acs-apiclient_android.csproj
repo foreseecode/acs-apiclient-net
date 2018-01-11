@@ -104,7 +104,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_sync_black_36dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_sync_black_36dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_sync_black_36dp.png" />
-    <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OAuth\src\OAuth\OAuth_Android.csproj">

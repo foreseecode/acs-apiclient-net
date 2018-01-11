@@ -804,44 +804,44 @@ namespace acs_apiclient
 		public partial class Color
 		{
 			
+			// aapt resource value: 0x7f09003b
+			public static int abc_background_cache_hint_selector_material_dark = 2131296315;
+			
+			// aapt resource value: 0x7f09003c
+			public static int abc_background_cache_hint_selector_material_light = 2131296316;
+			
+			// aapt resource value: 0x7f09003d
+			public static int abc_btn_colored_borderless_text_material = 2131296317;
+			
 			// aapt resource value: 0x7f09003e
-			public static int abc_background_cache_hint_selector_material_dark = 2131296318;
+			public static int abc_btn_colored_text_material = 2131296318;
 			
 			// aapt resource value: 0x7f09003f
-			public static int abc_background_cache_hint_selector_material_light = 2131296319;
+			public static int abc_color_highlight_material = 2131296319;
 			
 			// aapt resource value: 0x7f090040
-			public static int abc_btn_colored_borderless_text_material = 2131296320;
+			public static int abc_hint_foreground_material_dark = 2131296320;
 			
 			// aapt resource value: 0x7f090041
-			public static int abc_btn_colored_text_material = 2131296321;
-			
-			// aapt resource value: 0x7f090042
-			public static int abc_color_highlight_material = 2131296322;
-			
-			// aapt resource value: 0x7f090043
-			public static int abc_hint_foreground_material_dark = 2131296323;
-			
-			// aapt resource value: 0x7f090044
-			public static int abc_hint_foreground_material_light = 2131296324;
+			public static int abc_hint_foreground_material_light = 2131296321;
 			
 			// aapt resource value: 0x7f090001
 			public static int abc_input_method_navigation_guard = 2131296257;
 			
+			// aapt resource value: 0x7f090042
+			public static int abc_primary_text_disable_only_material_dark = 2131296322;
+			
+			// aapt resource value: 0x7f090043
+			public static int abc_primary_text_disable_only_material_light = 2131296323;
+			
+			// aapt resource value: 0x7f090044
+			public static int abc_primary_text_material_dark = 2131296324;
+			
 			// aapt resource value: 0x7f090045
-			public static int abc_primary_text_disable_only_material_dark = 2131296325;
+			public static int abc_primary_text_material_light = 2131296325;
 			
 			// aapt resource value: 0x7f090046
-			public static int abc_primary_text_disable_only_material_light = 2131296326;
-			
-			// aapt resource value: 0x7f090047
-			public static int abc_primary_text_material_dark = 2131296327;
-			
-			// aapt resource value: 0x7f090048
-			public static int abc_primary_text_material_light = 2131296328;
-			
-			// aapt resource value: 0x7f090049
-			public static int abc_search_url_text = 2131296329;
+			public static int abc_search_url_text = 2131296326;
 			
 			// aapt resource value: 0x7f090002
 			public static int abc_search_url_text_normal = 2131296258;
@@ -852,41 +852,38 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f090004
 			public static int abc_search_url_text_selected = 2131296260;
 			
+			// aapt resource value: 0x7f090047
+			public static int abc_secondary_text_material_dark = 2131296327;
+			
+			// aapt resource value: 0x7f090048
+			public static int abc_secondary_text_material_light = 2131296328;
+			
+			// aapt resource value: 0x7f090049
+			public static int abc_tint_btn_checkable = 2131296329;
+			
 			// aapt resource value: 0x7f09004a
-			public static int abc_secondary_text_material_dark = 2131296330;
+			public static int abc_tint_default = 2131296330;
 			
 			// aapt resource value: 0x7f09004b
-			public static int abc_secondary_text_material_light = 2131296331;
+			public static int abc_tint_edittext = 2131296331;
 			
 			// aapt resource value: 0x7f09004c
-			public static int abc_tint_btn_checkable = 2131296332;
+			public static int abc_tint_seek_thumb = 2131296332;
 			
 			// aapt resource value: 0x7f09004d
-			public static int abc_tint_default = 2131296333;
+			public static int abc_tint_spinner = 2131296333;
 			
 			// aapt resource value: 0x7f09004e
-			public static int abc_tint_edittext = 2131296334;
+			public static int abc_tint_switch_thumb = 2131296334;
 			
 			// aapt resource value: 0x7f09004f
-			public static int abc_tint_seek_thumb = 2131296335;
-			
-			// aapt resource value: 0x7f090050
-			public static int abc_tint_spinner = 2131296336;
-			
-			// aapt resource value: 0x7f090051
-			public static int abc_tint_switch_thumb = 2131296337;
-			
-			// aapt resource value: 0x7f090052
-			public static int abc_tint_switch_track = 2131296338;
+			public static int abc_tint_switch_track = 2131296335;
 			
 			// aapt resource value: 0x7f090005
 			public static int accent_material_dark = 2131296261;
 			
 			// aapt resource value: 0x7f090006
 			public static int accent_material_light = 2131296262;
-			
-			// aapt resource value: 0x7f09003c
-			public static int ash = 2131296316;
 			
 			// aapt resource value: 0x7f090007
 			public static int background_floating_material_dark = 2131296263;
@@ -923,9 +920,6 @@ namespace acs_apiclient
 			
 			// aapt resource value: 0x7f090012
 			public static int button_material_light = 2131296274;
-			
-			// aapt resource value: 0x7f09003b
-			public static int cloudy_blue = 2131296315;
 			
 			// aapt resource value: 0x7f090013
 			public static int dim_foreground_disabled_material_dark = 2131296275;
@@ -996,9 +990,6 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f090028
 			public static int notification_material_background_media_default_color = 2131296296;
 			
-			// aapt resource value: 0x7f09003d
-			public static int obsidian = 2131296317;
-			
 			// aapt resource value: 0x7f090029
 			public static int primary_dark_material_dark = 2131296297;
 			
@@ -1047,11 +1038,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f090038
 			public static int switch_thumb_disabled_material_light = 2131296312;
 			
-			// aapt resource value: 0x7f090053
-			public static int switch_thumb_material_dark = 2131296339;
+			// aapt resource value: 0x7f090050
+			public static int switch_thumb_material_dark = 2131296336;
 			
-			// aapt resource value: 0x7f090054
-			public static int switch_thumb_material_light = 2131296340;
+			// aapt resource value: 0x7f090051
+			public static int switch_thumb_material_light = 2131296337;
 			
 			// aapt resource value: 0x7f090039
 			public static int switch_thumb_normal_material_dark = 2131296313;
@@ -1683,8 +1674,8 @@ namespace acs_apiclient
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a005e
-			public static int action0 = 2131361886;
+			// aapt resource value: 0x7f0a005f
+			public static int action0 = 2131361887;
 			
 			// aapt resource value: 0x7f0a0047
 			public static int action_bar = 2131361863;
@@ -1707,17 +1698,17 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0024
 			public static int action_bar_title = 2131361828;
 			
-			// aapt resource value: 0x7f0a005b
-			public static int action_container = 2131361883;
+			// aapt resource value: 0x7f0a005c
+			public static int action_container = 2131361884;
 			
 			// aapt resource value: 0x7f0a0048
 			public static int action_context_bar = 2131361864;
 			
-			// aapt resource value: 0x7f0a0062
-			public static int action_divider = 2131361890;
+			// aapt resource value: 0x7f0a0063
+			public static int action_divider = 2131361891;
 			
-			// aapt resource value: 0x7f0a005c
-			public static int action_image = 2131361884;
+			// aapt resource value: 0x7f0a005d
+			public static int action_image = 2131361885;
 			
 			// aapt resource value: 0x7f0a0002
 			public static int action_menu_divider = 2131361794;
@@ -1734,11 +1725,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0026
 			public static int action_mode_close_button = 2131361830;
 			
-			// aapt resource value: 0x7f0a005d
-			public static int action_text = 2131361885;
+			// aapt resource value: 0x7f0a005e
+			public static int action_text = 2131361886;
 			
-			// aapt resource value: 0x7f0a006b
-			public static int actions = 2131361899;
+			// aapt resource value: 0x7f0a006c
+			public static int actions = 2131361900;
 			
 			// aapt resource value: 0x7f0a0027
 			public static int activity_chooser_view_content = 2131361831;
@@ -1761,14 +1752,14 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a002e
 			public static int buttonPanel = 2131361838;
 			
-			// aapt resource value: 0x7f0a005f
-			public static int cancel_action = 2131361887;
+			// aapt resource value: 0x7f0a0060
+			public static int cancel_action = 2131361888;
 			
 			// aapt resource value: 0x7f0a003e
 			public static int checkbox = 2131361854;
 			
-			// aapt resource value: 0x7f0a0067
-			public static int chronometer = 2131361895;
+			// aapt resource value: 0x7f0a0068
+			public static int chronometer = 2131361896;
 			
 			// aapt resource value: 0x7f0a001e
 			public static int collapseActionView = 2131361822;
@@ -1791,11 +1782,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a000c
 			public static int disableHome = 2131361804;
 			
-			// aapt resource value: 0x7f0a0058
-			public static int easyTintImageButton_titlebarWithExitAndRefreshButtons_close = 2131361880;
+			// aapt resource value: 0x7f0a0059
+			public static int easyTintImageButton_titlebarWithExitAndRefreshButtons_close = 2131361881;
 			
-			// aapt resource value: 0x7f0a005a
-			public static int easyTintImageButton_titlebarWithExitAndRefreshButtons_sync = 2131361882;
+			// aapt resource value: 0x7f0a005b
+			public static int easyTintImageButton_titlebarWithExitAndRefreshButtons_sync = 2131361883;
 			
 			// aapt resource value: 0x7f0a0049
 			public static int edit_query = 2131361865;
@@ -1803,8 +1794,8 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a001b
 			public static int end = 2131361819;
 			
-			// aapt resource value: 0x7f0a0071
-			public static int end_padder = 2131361905;
+			// aapt resource value: 0x7f0a0072
+			public static int end_padder = 2131361906;
 			
 			// aapt resource value: 0x7f0a0028
 			public static int expand_activities_button = 2131361832;
@@ -1821,8 +1812,8 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a002c
 			public static int icon = 2131361836;
 			
-			// aapt resource value: 0x7f0a006c
-			public static int icon_group = 2131361900;
+			// aapt resource value: 0x7f0a006d
+			public static int icon_group = 2131361901;
 			
 			// aapt resource value: 0x7f0a001f
 			public static int ifRoom = 2131361823;
@@ -1830,14 +1821,14 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0029
 			public static int image = 2131361833;
 			
-			// aapt resource value: 0x7f0a0068
-			public static int info = 2131361896;
+			// aapt resource value: 0x7f0a0069
+			public static int info = 2131361897;
 			
-			// aapt resource value: 0x7f0a006d
-			public static int line1 = 2131361901;
+			// aapt resource value: 0x7f0a006e
+			public static int line1 = 2131361902;
 			
-			// aapt resource value: 0x7f0a006f
-			public static int line3 = 2131361903;
+			// aapt resource value: 0x7f0a0070
+			public static int line3 = 2131361904;
 			
 			// aapt resource value: 0x7f0a0056
 			public static int linearlayout_externalFlowWeb_root = 2131361878;
@@ -1848,8 +1839,8 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a002b
 			public static int list_item = 2131361835;
 			
-			// aapt resource value: 0x7f0a0061
-			public static int media_actions = 2131361889;
+			// aapt resource value: 0x7f0a0062
+			public static int media_actions = 2131361890;
 			
 			// aapt resource value: 0x7f0a001c
 			public static int middle = 2131361820;
@@ -1866,14 +1857,14 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a000a
 			public static int normal = 2131361802;
 			
-			// aapt resource value: 0x7f0a006a
-			public static int notification_background = 2131361898;
+			// aapt resource value: 0x7f0a006b
+			public static int notification_background = 2131361899;
+			
+			// aapt resource value: 0x7f0a0065
+			public static int notification_main_column = 2131361893;
 			
 			// aapt resource value: 0x7f0a0064
-			public static int notification_main_column = 2131361892;
-			
-			// aapt resource value: 0x7f0a0063
-			public static int notification_main_column_container = 2131361891;
+			public static int notification_main_column_container = 2131361892;
 			
 			// aapt resource value: 0x7f0a0030
 			public static int parentPanel = 2131361840;
@@ -1887,11 +1878,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0040
 			public static int radio = 2131361856;
 			
-			// aapt resource value: 0x7f0a0069
-			public static int right_icon = 2131361897;
+			// aapt resource value: 0x7f0a006a
+			public static int right_icon = 2131361898;
 			
-			// aapt resource value: 0x7f0a0065
-			public static int right_side = 2131361893;
+			// aapt resource value: 0x7f0a0066
+			public static int right_side = 2131361894;
 			
 			// aapt resource value: 0x7f0a0014
 			public static int screen = 2131361812;
@@ -1965,8 +1956,8 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0017
 			public static int src_over = 2131361815;
 			
-			// aapt resource value: 0x7f0a0060
-			public static int status_bar_latest_event_content = 2131361888;
+			// aapt resource value: 0x7f0a0061
+			public static int status_bar_latest_event_content = 2131361889;
 			
 			// aapt resource value: 0x7f0a0041
 			public static int submenuarrow = 2131361857;
@@ -1977,11 +1968,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a000b
 			public static int tabMode = 2131361803;
 			
-			// aapt resource value: 0x7f0a0070
-			public static int text = 2131361904;
+			// aapt resource value: 0x7f0a0071
+			public static int text = 2131361905;
 			
-			// aapt resource value: 0x7f0a006e
-			public static int text2 = 2131361902;
+			// aapt resource value: 0x7f0a006f
+			public static int text2 = 2131361903;
 			
 			// aapt resource value: 0x7f0a0035
 			public static int textSpacerNoButtons = 2131361845;
@@ -1989,11 +1980,11 @@ namespace acs_apiclient
 			// aapt resource value: 0x7f0a0034
 			public static int textSpacerNoTitle = 2131361844;
 			
-			// aapt resource value: 0x7f0a0059
-			public static int textview_titlebarWithExitAndRefreshButtons_title = 2131361881;
+			// aapt resource value: 0x7f0a005a
+			public static int textview_titlebarWithExitAndRefreshButtons_title = 2131361882;
 			
-			// aapt resource value: 0x7f0a0066
-			public static int time = 2131361894;
+			// aapt resource value: 0x7f0a0067
+			public static int time = 2131361895;
 			
 			// aapt resource value: 0x7f0a002d
 			public static int title = 2131361837;
@@ -2017,7 +2008,10 @@ namespace acs_apiclient
 			public static int useLogo = 2131361810;
 			
 			// aapt resource value: 0x7f0a0057
-			public static int webview_externalFlowWeb_content = 2131361879;
+			public static int view_externalFlowWeb_border = 2131361879;
+			
+			// aapt resource value: 0x7f0a0058
+			public static int webview_externalFlowWeb_content = 2131361880;
 			
 			// aapt resource value: 0x7f0a0021
 			public static int withText = 2131361825;
