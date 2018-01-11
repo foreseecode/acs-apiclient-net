@@ -16,10 +16,8 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        private static Android.Graphics.Color Obsidian = Android.Graphics.Color.ParseColor(Colors.Obsidian);
-        private static Android.Graphics.Color Ash = Android.Graphics.Color.ParseColor(Colors.Ash);
-        private static Android.Graphics.Color SelectedButtonTintColor = Ash;
-        private static Android.Graphics.Color UnselectedButtonTintColor = Obsidian;
+        private static Android.Graphics.Color SelectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Ash);
+        private static Android.Graphics.Color UnselectedButtonTintColor = Android.Graphics.Color.ParseColor(Colors.Obsidian);
         private WebView contentWebView;
         private String urlString;
         private Android.Net.Uri uri;
@@ -40,7 +38,7 @@ namespace acs_apiclient.Droid
             this.urlString = this.Intent.GetStringExtra(UrlParamKey);
             if (String.IsNullOrEmpty(this.urlString))
             {
-                throw new ArgumentException($"'url' must be provided in the Intent to start {typeof(ExternalFlowWebActivity)}");
+                throw new ArgumentException($"A URL must be provided for the '{UrlParamKey} key in the Intent to start {typeof(ExternalFlowWebActivity)}");
             }
             this.uri = Android.Net.Uri.Parse(this.urlString);
         }
