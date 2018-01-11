@@ -83,7 +83,6 @@
     <Compile Include="Droid\Activity\ExternalFlowWebActivity.cs" />
     <Compile Include="Droid\CustomViews\DrawableExtension.cs" />
     <Compile Include="Droid\CustomViews\ImageViewExtension.cs" />
-    <Compile Include="Droid\WebView\ExternalFlowWebViewClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -124,7 +123,6 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Droid\CustomViews\" />
     <Folder Include="Droid\Activity\" />
-    <Folder Include="Droid\WebView\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

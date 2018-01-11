@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -8,7 +7,6 @@ using acs_apiclient.Droid.CustomViews;
 using Android.Widget;
 using System.Threading;
 using AcsApi;
-using Android.Graphics;
 
 namespace acs_apiclient.Droid
 {
@@ -100,7 +98,6 @@ namespace acs_apiclient.Droid
             */
             public override bool ShouldOverrideUrlLoading(WebView webview, String url)
             {
-                Console.WriteLine($"ShouldOverrideUrlLoading: url={url}");
                 bool shouldOverrideUrl = false;
                 try
                 {
