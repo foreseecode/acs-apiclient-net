@@ -6,11 +6,10 @@ using AcsApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using Android.Views.InputMethods;
 
 namespace AcsApi
 {
-    public partial class LoginController: PlatformLoginController
+    public partial class LoginController : PlatformLoginController
     {
         private static LoginController instance;
         

@@ -16,8 +16,8 @@ namespace acs_apiclient.Droid
     public class ExternalFlowWebActivity : Activity
     {
         public static string UrlParamKey = "url";
-        private static Android.Graphics.Color Obsidian = Android.Graphics.Color.ParseColor("#222b3c");
-        private static Android.Graphics.Color Ash = Android.Graphics.Color.ParseColor("#B7C0CC");
+        private static Android.Graphics.Color Obsidian = Android.Graphics.Color.ParseColor(Colors.Obsidian);
+        private static Android.Graphics.Color Ash = Android.Graphics.Color.ParseColor(Colors.Ash);
         private static Android.Graphics.Color SelectedButtonTintColor = Ash;
         private static Android.Graphics.Color UnselectedButtonTintColor = Obsidian;
         private WebView contentWebView;
