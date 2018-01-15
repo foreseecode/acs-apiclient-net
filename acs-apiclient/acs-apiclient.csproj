@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcsApi</RootNamespace>
     <AssemblyName>acs-apiclient</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -63,10 +63,10 @@
     <Compile Include="LoginConfiguration.cs" />
     <Compile Include="LoginDelegate.cs" />
     <Compile Include="ExternalFlowDelegate.cs" />
-    <Compile Include="Errors.cs" />
     <Compile Include="Models\LoginEnvironment.cs" />
     <Compile Include="Models\TokenExchangeRequestBody.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OAuth\src\OAuth\OAuth.csproj">

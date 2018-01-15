@@ -9,8 +9,10 @@ using RestSharp;
 
 namespace AcsApi
 {
-    public partial class LoginController: PlatformLoginController
+    public partial class LoginController : PlatformLoginController
     {
+        private static LoginController instance;
+        
         /// <summary>
         /// The configuration.
         /// </summary>
@@ -20,23 +22,37 @@ namespace AcsApi
         /// The login delegate.
         /// </summary>
         LoginDelegate loginDelegate;
+        
+        private LoginController(){}
+                
+        public static LoginController Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new LoginController();
+                }
+                return instance;
+            }
+        }
+        
+        public static void DestroyInstance()
+        {
+            instance = null;
+        }
+        
+        public void Configure(LoginConfiguration configuration, LoginDelegate loginDelegate)
+        {
+            this.configuration = configuration;
+            this.loginDelegate = loginDelegate;
+        }
 
         /// <summary>
         /// Gets and sets the selected identity provider.
         /// </summary>
         /// <value>The selected identity provider.</value>
         internal IdentityProvider selectedIdentityProvider { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:AcsApi.LoginController"/> class.
-        /// </summary>
-        /// <param name="configuration">A LoginConfiguration.</param>
-        /// <param name="loginDelegate">A LoginDelegate, usually the calling class.</param>
-        public LoginController(LoginConfiguration configuration, LoginDelegate loginDelegate)
-        {
-            this.configuration = configuration;
-            this.loginDelegate = loginDelegate;
-        }
 
         /// <summary>
         /// Initializes the identity.
