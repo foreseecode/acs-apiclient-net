@@ -41,7 +41,7 @@ namespace AcsApi
         void EncounteredError(AcsApiError error, string message, int code = 0);
 
         /// <summary>
-        /// Informs the delegate that progress has been made in the flow and that it should inform the user of this.
+        /// Informs the delegate that progress has been made in the flow and that it should inform the user.
         /// </summary>
         /// <param name="message">A message associated with the change</param>
         void ProgressChanged(string message);
