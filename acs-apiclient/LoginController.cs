@@ -292,7 +292,7 @@ namespace AcsApi
             {
                 loginDelegate.EncounteredError(AcsApiError.InvalidCallbackParameters, "The Auth Code is invalid.");
             }
-            loginDelegate.ProgressChanged("You were authenticated successfully, we're logging you in.");
+            loginDelegate.ProgressChanged("Logging in...");
             BeginAccessTokenExchange(authCode);
         }
 
