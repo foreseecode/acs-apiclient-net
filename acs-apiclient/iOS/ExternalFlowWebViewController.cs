@@ -80,7 +80,7 @@ namespace AcsApi.iOS
 
         void PrepareBackButton()
         {
-            var closeIcon = UIImage.FromBundle("ic_close");
+            var closeIcon = UIImage.FromFile("iOS/Images/ic_close-lib.png");
             dismissButton = new UIBarButtonItem(closeIcon, UIBarButtonItemStyle.Plain, (sender, e) => {
                 webViewLoginDelegate.UserCancelledLogin();
                 DismissViewController(true, null);
@@ -89,7 +89,7 @@ namespace AcsApi.iOS
 
         void PrepareRefreshButton()
         {
-            var refreshIcon = UIImage.FromBundle("ic_sync");
+            var refreshIcon = UIImage.FromBundle("iOS/Images/ic_sync-lib.png");
             refreshButton = new UIBarButtonItem(refreshIcon, UIBarButtonItemStyle.Plain, (sender, e) => {
 				webView.LoadRequest(new NSUrlRequest(urlToLoad));            
             });

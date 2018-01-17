@@ -72,8 +72,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <PackageReference Include="RestSharp" Version="105.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="RestSharp">
+      <Version>106.2.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,25 +89,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="iOS\LibraryImages.xcassets\Contents.json" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\Contents.json" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close_2x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close_36pt.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close_36pt_2x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close_36pt_3x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_close.imageset\ic_close_3x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\Contents.json" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync_2x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync_36pt.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync_36pt_2x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync_36pt_3x.png" />
-    <ImageAsset Include="iOS\LibraryImages.xcassets\ic_sync.imageset\ic_sync_3x.png" />
+    <Folder Include="iOS\Images\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="iOS\LibraryImages.xcassets\ic_close.imageset\" />
-    <Folder Include="iOS\LibraryImages.xcassets\ic_sync.imageset\" />
+    <BundleResource Include="iOS\Images\ic_close-lib%402x.png" />
+    <BundleResource Include="iOS\Images\ic_close-lib%403x.png" />
+    <BundleResource Include="iOS\Images\ic_close-lib.png" />
+    <BundleResource Include="iOS\Images\ic_sync-lib%402x.png" />
+    <BundleResource Include="iOS\Images\ic_sync-lib%403x.png" />
+    <BundleResource Include="iOS\Images\ic_sync-lib.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
