@@ -70,5 +70,13 @@ namespace AcsApi
         /// <param name="request">An HttpWebRequest that is ready to be sent and just requires OAuth headers and cookies to be added.</param>
         /// <returns>The response stream obtained by issuing the request</returns>
         AcsApiClient.WebResponseWrapper MakeRequest(HttpWebRequest request);
+
+        /// <summary>
+        /// Checks if the OAuth token is expired
+        /// </summary>
+        /// <returns><c>true</c>, if token is expired, <c>false</c> otherwise.</returns>
+        bool TokenExpired();
+
+        string TokenString { get; }
     }
 }

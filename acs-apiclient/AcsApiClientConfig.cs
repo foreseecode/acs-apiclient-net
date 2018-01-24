@@ -26,6 +26,8 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 // ReSharper disable CheckNamespace
+using System;
+
 namespace AcsApi
 // ReSharper restore CheckNamespace
 {
@@ -89,17 +91,26 @@ namespace AcsApi
         /// <summary>
         /// A token received upon completing the entire authentication flow
         /// </summary>
-        public string OAuthToken { get; set; }
+        internal string OAuthToken { get; set; }
 
         /// <summary>
         /// A secret received upon completing the entire authentication flow
         /// </summary>
-        public string OAuthSecret { get; set; }
+        internal string OAuthSecret { get; set; }
 
         /// <summary>
         /// Determines if the AcsApiClient was created from the SSO Flow
         /// </summary>
-        public bool IsSSOClient { get; internal set; } = false;
+        internal bool IsSSOClient { get; set; } = false;
+
+        /// <summary>
+        /// The expiration date of the OAuthToken.
+        /// </summary>
+        internal DateTime ExpirationDate { get; set; }
+
+        internal string EncodedTokenString => $"{ Utility.Base64Encode(OAuthToken) }" +
+            $".{ Utility.Base64Encode(OAuthSecret) }" +
+            $".{ Utility.Base64Encode(ExpirationDate.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'")) }";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
@@ -128,7 +139,7 @@ namespace AcsApi
         ) {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
-            this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";
+            this.ServerRoot = serverRoot.EndsWith("/", StringComparison.CurrentCulture) ? serverRoot : serverRoot + "/";
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
         }

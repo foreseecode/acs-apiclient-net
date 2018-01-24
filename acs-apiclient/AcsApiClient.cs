@@ -98,6 +98,14 @@ namespace AcsApi
         /// </summary>
         private const string SessionIdKey = "jsessionid";
 
+        public string TokenString
+        {
+            get
+            {
+                return serviceConfig.EncodedTokenString;
+            }
+        }
+
         public event Action<string> Log;
 
         private void InvokeLog(string str)
@@ -117,7 +125,7 @@ namespace AcsApi
         /// </summary>
         /// <param name="config"><see cref="AcsApiClient"/> instance containing configuration details.
         /// </param>
-        public AcsApiClient(AcsApiClientConfig config, bool isAcsPortal = false)
+        internal AcsApiClient(AcsApiClientConfig config, bool isAcsPortal = false)
         {
             if (!config.IsSSOClient 
                && (string.IsNullOrEmpty(config.PortalPassword) || string.IsNullOrEmpty(config.PortalUsername))
@@ -546,6 +554,7 @@ namespace AcsApi
         {
             public string token { get; set; }
             public string secret { get; set; }
+            public string expires { get; set; }
         }
 
         private void LoadAcsToken()
@@ -576,6 +585,7 @@ namespace AcsApi
             }
             serviceConfig.OAuthSecret = unmarshalledResponse.secret;
             serviceConfig.OAuthToken = unmarshalledResponse.token;
+            serviceConfig.ExpirationDate = DateTime.Parse(unmarshalledResponse.expires).ToUniversalTime();
         }
 
         private void LoadFssToken()
@@ -694,6 +704,11 @@ namespace AcsApi
                     InvokeLog("Final Tokens: " + serviceConfig.OAuthToken + " : " + serviceConfig.OAuthSecret);
                 }
             }
+        }
+
+        public bool TokenExpired()
+        {
+            return Utility.Expired(serviceConfig.ExpirationDate);
         }
     }
 }

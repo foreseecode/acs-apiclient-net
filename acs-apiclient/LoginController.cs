@@ -22,9 +22,18 @@ namespace AcsApi
         /// The login delegate.
         /// </summary>
         LoginDelegate loginDelegate;
+
+        /// <summary>
+        /// Gets and sets the selected identity provider.
+        /// </summary>
+        /// <value>The selected identity provider.</value>
+        internal IdentityProvider selectedIdentityProvider { get; private set; }
         
-        private LoginController(){}
-                
+        private LoginController() { }
+
+        /// <summary>
+        /// A shared instance of LoginController.
+        /// </summary>
         public static LoginController Instance
         {
             get
@@ -36,12 +45,20 @@ namespace AcsApi
                 return instance;
             }
         }
-        
+
+        /// <summary>
+        /// Destroys the instance.
+        /// </summary>
         public static void DestroyInstance()
         {
             instance = null;
         }
-        
+
+        /// <summary>
+        /// Setup the specified configuration and loginDelegate.
+        /// </summary>
+        /// <param name="configuration">Configuration.</param>
+        /// <param name="loginDelegate">Login delegate.</param>
         public void Configure(LoginConfiguration configuration, LoginDelegate loginDelegate)
         {
             this.configuration = configuration;
@@ -49,10 +66,24 @@ namespace AcsApi
         }
 
         /// <summary>
-        /// Gets and sets the selected identity provider.
+        /// Initializes an ApiClient with a token string if it is valid.
         /// </summary>
-        /// <value>The selected identity provider.</value>
-        internal IdentityProvider selectedIdentityProvider { get; private set; }
+        /// <param name="tokenString">Token string.</param>
+        /// <returns><c>true</c>, if the token is valid, <c>false</c> otherwise.</returns>
+        public bool InitializesWithTokenString(string tokenString)
+        {
+            if (Utility.ValidateToken(tokenString))
+            {
+                var tokens = tokenString.Split('.');
+                MakeApiClient(
+                    Utility.Base64Decode(tokens[0]),
+                    Utility.Base64Decode(tokens[1]),
+                    Utility.Base64Decode(tokens[2])
+                );
+                return true;
+            }
+            return false;
+        }
 
         /// <summary>
         /// Initializes the identity.
@@ -94,6 +125,10 @@ namespace AcsApi
             });
         }
 
+        /// <summary>
+        /// Begins the authentication flow with a password.
+        /// </summary>
+        /// <param name="password">The Password to be used in the authentication flow.</param>
         public void BeginPasswordFlow(string password)
         {
             configuration.Password = password;
@@ -177,6 +212,7 @@ namespace AcsApi
 
             var oauthToken = result["token"].ToString();
             var oauthSecret = result["secret"].ToString();
+            var expirationDate = result["expires"].ToString();
 
             if (string.IsNullOrEmpty(oauthToken) || string.IsNullOrEmpty(oauthSecret)) {
                 RunOnMainThread(() => {
@@ -188,29 +224,7 @@ namespace AcsApi
                 return;
             }
 
-            var acsApiClientConfiguration = new AcsApiClientConfig(
-                configuration.ConsumerKey,
-                configuration.ConsumerSecret,
-                configuration.ServicesBaseUrl
-            );
-
-            acsApiClientConfiguration.IsSSOClient = true;
-            acsApiClientConfiguration.OAuthToken = oauthToken;
-            acsApiClientConfiguration.OAuthSecret = oauthSecret;
-
-            try
-            {
-                var acsApiClient = new AcsApiClient(acsApiClientConfiguration, true);
-                RunOnMainThread(() => loginDelegate.Authenticated(acsApiClient));
-            }
-            catch (AcsApiException exception)
-            {
-                RunOnMainThread(() => loginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
-            }
-            catch (Exception exception)
-            {
-                RunOnMainThread(() => loginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
-            }
+            MakeApiClient(oauthToken, oauthSecret, expirationDate);
         }
 
         /// <summary>
@@ -236,6 +250,40 @@ namespace AcsApi
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Makes an API client with an OAuth token, OAuth secret and Expiration Date.
+        /// </summary>
+        /// <param name="oauthToken">OAuth token.</param>
+        /// <param name="oauthSecret">OAuth secret.</param>
+        /// <param name="expirationDate">Expiration date.</param>
+        void MakeApiClient(string oauthToken, string oauthSecret, string expirationDate)
+        {
+            var acsApiClientConfiguration = new AcsApiClientConfig(
+                configuration.ConsumerKey,
+                configuration.ConsumerSecret,
+                configuration.ServicesBaseUrl
+            );
+
+            try
+            {
+                acsApiClientConfiguration.IsSSOClient = true;
+                acsApiClientConfiguration.OAuthToken = oauthToken;
+                acsApiClientConfiguration.OAuthSecret = oauthSecret;
+                acsApiClientConfiguration.ExpirationDate = DateTime.Parse(expirationDate).ToUniversalTime();
+
+                var acsApiClient = new AcsApiClient(acsApiClientConfiguration, true);
+                RunOnMainThread(() => loginDelegate.Authenticated(acsApiClient));
+            }
+            catch (AcsApiException exception)
+            {
+                RunOnMainThread(() => loginDelegate.EncounteredError(exception.ErrorCode, exception.Message));
+            }
+            catch (Exception exception)
+            {
+                RunOnMainThread(() => loginDelegate.EncounteredError(AcsApiError.Other, exception.Message));
+            }
         }
     }
 
