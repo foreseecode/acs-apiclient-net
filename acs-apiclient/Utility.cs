@@ -37,10 +37,10 @@ namespace AcsApi
         internal static bool ValidateToken(string tokenString)
         {
             var tokens = tokenString?.Split('.') ?? new string[] { };
-            if (tokens.Count() < 3) { return false; }
+            if (tokens.Count() < Constants.NumberOfTokens) { return false; }
             try
             {
-                var decodedDateString = Base64Decode(tokens[2]);
+                var decodedDateString = Base64Decode(tokens[Constants.ExpirationDateIndex]);
                 var expirationDate = DateTime.Parse(decodedDateString).ToUniversalTime();
                 return !Expired(expirationDate);
             }

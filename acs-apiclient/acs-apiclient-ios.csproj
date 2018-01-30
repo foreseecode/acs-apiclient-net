@@ -61,6 +61,7 @@
     <Compile Include="Utility.cs" />
     <Compile Include="Models\TokenExchangeRequestBody.cs" />
     <Compile Include="PlatformLoginController.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.CSharp" />

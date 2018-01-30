@@ -11,7 +11,7 @@ namespace AcsApi
 {
     public partial class LoginController : PlatformLoginController
     {
-        private static LoginController instance;
+        static LoginController instance;
         
         /// <summary>
         /// The configuration.
@@ -29,7 +29,7 @@ namespace AcsApi
         /// <value>The selected identity provider.</value>
         internal IdentityProvider selectedIdentityProvider { get; private set; }
         
-        private LoginController() { }
+        LoginController() { }
 
         /// <summary>
         /// A shared instance of LoginController.
@@ -76,9 +76,9 @@ namespace AcsApi
             {
                 var tokens = tokenString.Split('.');
                 MakeApiClient(
-                    Utility.Base64Decode(tokens[0]),
-                    Utility.Base64Decode(tokens[1]),
-                    Utility.Base64Decode(tokens[2])
+                    Utility.Base64Decode(tokens[Constants.OAuthTokenIndex]),
+                    Utility.Base64Decode(tokens[Constants.OAuthSecretIndex]),
+                    Utility.Base64Decode(tokens[Constants.ExpirationDateIndex])
                 );
                 return true;
             }

@@ -110,7 +110,7 @@ namespace AcsApi
 
         internal string EncodedTokenString => $"{ Utility.Base64Encode(OAuthToken) }" +
             $".{ Utility.Base64Encode(OAuthSecret) }" +
-            $".{ Utility.Base64Encode(ExpirationDate.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'")) }";
+            $".{ Utility.Base64Encode(ExpirationDate.ToString(Constants.DateFormat)) }";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
