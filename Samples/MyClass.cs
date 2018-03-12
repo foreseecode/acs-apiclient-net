@@ -16,6 +16,8 @@ namespace UnitTests
             var foreseeClient = new AcsApiClient(clientConfig);
             bool hasToken = HasOAuthToken(foreseeClient);
             Console.WriteLine($"hasOAuthToken: {hasToken}");
+            
+            //foreseeClient.GetAuthHeadersForRequest();
         }
 
         static bool HasOAuthToken(IAcsApiClient client)
@@ -25,15 +27,12 @@ namespace UnitTests
                 const string url = "https://portal2.foreseeresults.com/services/currentUser/";
                 var uri = new Uri(url);
                 var oauthtoken = client.GetAuthHeadersForRequestByType(url, "GET");
-                if (!oauthtoken.StartsWith("OAuth"))
-                {
-                    throw new InvalidOperationException("OAuth header is incorrectly formatted");
-                }
-
-                var token = oauthtoken.Substring("OAuth ".Length);
-                Console.WriteLine($"token={token}");
-
-                return !string.IsNullOrEmpty(token);
+                //if (!oauthtoken.StartsWith("OAuth"))
+                //{
+                //    throw new InvalidOperationException("OAuth header is incorrectly formatted");
+                //}
+                Console.WriteLine($"token={oauthtoken}");
+                return !string.IsNullOrEmpty(oauthtoken);
             }
             catch (Exception e)
             {

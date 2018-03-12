@@ -15,3 +15,5 @@
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/RestSharp.xml
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.exe
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.pdb
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/Newtonsoft.Json.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/Newtonsoft.Json.xml

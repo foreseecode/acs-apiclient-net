@@ -1,8 +1,12 @@
 ﻿<Properties StartupConfiguration="{7E474BA8-94D9-4997-A9B0-505C581ABBB6}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Samples/MyClass.cs">
     <Files>
-      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="120" Column="34" />
-      <File FileName="acs-apiclient/AcsApiClient.cs" Line="682" Column="1" />
+      <File FileName="acs-apiclient/AcsApiClient.cs" Line="215" Column="31" />
+      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="60" Column="46" />
+      <File FileName="OAuth/src/OAuth/OAuthRequest.cs" Line="69" Column="42" />
+      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="36" Column="18" />
+      <File FileName="acs-apiclient/AccessRequestBody.cs" Line="11" Column="1" />
+      <File FileName="Samples/MyClass.cs" Line="13" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -21,6 +25,9 @@
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="28" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="36" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="18" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="214" column="56" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="208" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="215" column="31" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

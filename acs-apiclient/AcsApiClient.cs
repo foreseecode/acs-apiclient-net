@@ -41,6 +41,7 @@ using acs_apiclient;
 using Newtonsoft.Json;
 using OAuth;
 using RestSharp;
+using Newtonsoft.Json.Linq;
 
 //using RestSharp;
 
@@ -172,21 +173,46 @@ namespace AcsApi
                 }
             }
 
-            // Creating a new instance directly
-            var client = new OAuthRequest
-            {
-                Method = type,
-                Type = OAuthRequestType.ProtectedResource,
-                SignatureMethod = OAuthSignatureMethod.HmacSha1,
-                ConsumerKey = serviceConfig.ConsumerKey,
-                ConsumerSecret = serviceConfig.ConsumerSecret,
-                Token = serviceConfig.AccessToken,
-                TokenSecret = serviceConfig.AccessTokenSecret,
-                RequestUrl = requestUrl
-            };
+            //// Creating a new instance directly
+            //var client = new OAuthRequest
+            //{
+            //    Method = type,
+            //    Type = OAuthRequestType.ProtectedResource,
+            //    SignatureMethod = OAuthSignatureMethod.HmacSha1,
+            //    ConsumerKey = serviceConfig.ConsumerKey,
+            //    ConsumerSecret = serviceConfig.ConsumerSecret,
+            //    Token = serviceConfig.AccessToken,
+            //    TokenSecret = serviceConfig.AccessTokenSecret,
+            //    RequestUrl = requestUrl
+            //};
 
-            // Using HTTP header authorization
-            return client.GetAuthorizationHeader(ParseParamCollection(new Uri(requestUrl)));
+            //// Using HTTP header authorization
+            //return client.GetAuthorizationHeader(ParseParamCollection(new Uri(requestUrl)));
+            string loginUrl = this.serviceConfig.ForeseeAuthServiceUri + this.serviceConfig.AccessLogin;
+            var client = new RestClient(loginUrl);
+            var accessRequest = new RestRequest(Method.POST);
+
+            var accessRequestBody = new AccessRequestBody(
+                this.serviceConfig.ConsumerKey,
+                this.serviceConfig.ConsumerSecret,
+                this.serviceConfig.PortalUsername,
+                this.serviceConfig.PortalPassword
+            );
+
+            var jsonBody = JsonConvert.SerializeObject(accessRequestBody);
+            accessRequest.AddParameter("application/json", jsonBody, ParameterType.RequestBody);
+
+            var response = client.Execute(accessRequest);
+            if (!(response.StatusCode == HttpStatusCode.OK))
+            {
+                return string.Empty;
+            }
+
+            var result = JsonConvert.DeserializeObject<JObject>(response.Content);
+
+            var oauthToken = result["token"].ToString();
+            Console.WriteLine("Token [{0}]", oauthToken);
+            return oauthToken;
         }
 
         public IDictionary<string, string> ParseParamCollection(Uri path)
