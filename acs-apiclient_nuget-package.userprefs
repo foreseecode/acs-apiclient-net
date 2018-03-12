@@ -1,8 +1,8 @@
-﻿<Properties StartupConfiguration="{4662A51A-43A7-43C1-B976-EF5525FB3B07}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Samples/MyClass.cs">
+﻿<Properties StartupConfiguration="{7E474BA8-94D9-4997-A9B0-505C581ABBB6}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
     <Files>
-      <File FileName="acs-apiclient/acs-apiclient.csproj" Line="1" Column="1" />
-      <File FileName="Samples/MyClass.cs" Line="26" Column="31" />
+      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="120" Column="34" />
+      <File FileName="acs-apiclient/AcsApiClient.cs" Line="682" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -17,8 +17,13 @@
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="41" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="18" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="36" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="13" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="28" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="36" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="18" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Samples PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

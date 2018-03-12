@@ -35,6 +35,9 @@ namespace AcsApi
     /// </summary>
     public class AcsApiClientConfig
     {
+        public string ForeseeServicesUri = "https://portal2.foreseeresults.com/services/";
+        public string ForeseeAuthServiceUri = "https://services-edge.foresee.com/";
+        
         /// <summary>
         /// Request token URL
         /// </summary>
@@ -121,6 +124,14 @@ namespace AcsApi
             this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
+        }
+        
+        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword,
+            string foreseeAuthServiceUri, String servicesUri)
+        {
+            this(consumerKey, consumerSecret, serverRoot, portalUsername, portalPassword);
+            ForeseeAuthServiceUri = foreseeAuthServiceUri;
+            ForeservicesUri = servicesUri;
         }
     }
 }
