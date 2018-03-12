@@ -127,11 +127,10 @@ namespace AcsApi
         }
         
         public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword,
-            string foreseeAuthServiceUri, String servicesUri)
+            string foreseeAuthServiceUri, string servicesUri) : this(consumerKey, consumerSecret, serverRoot, portalUsername, portalPassword)
         {
-            this(consumerKey, consumerSecret, serverRoot, portalUsername, portalPassword);
             ForeseeAuthServiceUri = foreseeAuthServiceUri;
-            ForeservicesUri = servicesUri;
+            ForeseeServicesUri = servicesUri;
         }
     }
 }
