@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{4662A51A-43A7-43C1-B976-EF5525FB3B07}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Samples/MyClass.cs">
+    <Files>
+      <File FileName="acs-apiclient/acs-apiclient.csproj" Line="1" Column="1" />
+      <File FileName="Samples/MyClass.cs" Line="26" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.OAuth__Android PreferredExecutionTarget="Android.Nexus_S_API24" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="46" column="76" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="51" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="37" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="31" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="25" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="41" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="18" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="36" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

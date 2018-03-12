@@ -1,0 +1,17 @@
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.csprojResolveAssemblyReference.cache
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.csproj.CoreCompileInputs.cache
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/Samples.exe
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/Samples.pdb
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/acs-apiclient.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/OAuth.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/System.Net.Http.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/System.Security.Cryptography.Algorithms.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/System.Security.Cryptography.Encoding.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/System.Security.Cryptography.Primitives.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/System.Security.Cryptography.X509Certificates.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/RestSharp.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/acs-apiclient.pdb
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/OAuth.pdb
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/bin/Debug/RestSharp.xml
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.exe
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/obj/Debug/Samples.pdb
