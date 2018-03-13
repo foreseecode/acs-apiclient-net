@@ -71,26 +71,6 @@ namespace AcsApi
         /// </summary>
         private const string ConsumerTypeIdKey = "CONSUMER_TYPE";
 
-        /// <summary>
-        /// Type of API consumer that can use this module.
-        /// </summary>
-        private const string ConsumerTypeValue = "PUBLIC_API_TIER_1";
-
-        /// <summary>
-        /// Key name used to refer to the OAuth verifier (in url parameters and other collections.)
-        /// </summary>
-        private const string OauthVerifierKey = "oauth_verifier";
-
-        /// <summary>
-        /// Key name used to refer to the OAuth token (in url parameters and other collections.)
-        /// </summary>
-        private const string OauthTokenKey = "oauth_token";
-
-        /// <summary>
-        /// Key name used to refer to the OAuth token secret (in url parameters and other collections.)
-        /// </summary>
-        private const string OauthTokenSecretKey = "oauth_token_secret";
-
         private readonly bool _acsPortal = false;
 
         /// <summary>
