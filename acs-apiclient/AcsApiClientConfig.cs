@@ -37,7 +37,7 @@ namespace AcsApi
     {
         
         /* Legacy Foresee Services URI - To be retired*/
-        public string ForeseeServicesUri = "https://portal2.foreseeresults.com/services/";
+        public string ForeseeServicesUri { get; set; } = "https://portal2.foreseeresults.com/services/";
         
         /* Auth URI: For the purpose of this library the services URI is still the above.
         Only the authentication URI is changing */
@@ -47,21 +47,6 @@ namespace AcsApi
         public string AccessLogin = "access";
         
         /// <summary>
-        /// Request token URL
-        /// </summary>
-        internal const string RequestUrl = "oauth/request_token";
-
-        /// <summary>
-        /// Authorization URL
-        /// </summary>
-        internal const string AuthUrl = "oauth/user_authorization";
-
-        /// <summary>
-        /// Request access token URL
-        /// </summary>
-        internal const string AccessUrl = "oauth/access_token";
-
-        /// <summary>
         /// The services login
         /// </summary>
         internal const string ServicesLoginUrl = "login";
@@ -70,7 +55,6 @@ namespace AcsApi
         /// acs services login path
         /// </summary>
         internal const string AcsServicesLoginUrl = "access";
-
 
         /// <summary>
         /// The username

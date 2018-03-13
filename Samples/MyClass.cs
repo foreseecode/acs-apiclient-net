@@ -10,8 +10,10 @@ namespace UnitTests
 
         static void Main(string[] args)
         {
+            string baseUrlDoesNotProvideToken = "https://portal2.foreseeresults.com/services/";
+            string baseUrlForPROD = "https://services-edge.foresee.com/";
             var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret,
-                "https://portal2.foreseeresults.com/services/", "***REMOVED***", "***REMOVED***");
+                baseUrlForPROD, "***REMOVED***", "***REMOVED***");
 
             var foreseeClient = new AcsApiClient(clientConfig);
             bool hasToken = HasOAuthToken(foreseeClient);
@@ -24,13 +26,10 @@ namespace UnitTests
         {
             try
             {
-                const string url = "https://portal2.foreseeresults.com/services/currentUser/";
-                var uri = new Uri(url);
-                var oauthtoken = client.GetAuthHeadersForRequestByType(url, "GET");
-                //if (!oauthtoken.StartsWith("OAuth"))
-                //{
-                //    throw new InvalidOperationException("OAuth header is incorrectly formatted");
-                //}
+                const string UrlDoesNotProvideToken = "https://portal2.foreseeresults.com/services/currentUser/";
+                const string urlForPROD = "https://services-edge.foresee.com/currentUser/";
+                var uri = new Uri(urlForPROD);
+                var oauthtoken = client.GetAuthHeadersForRequestByType(urlForPROD, "GET");
                 Console.WriteLine($"token={oauthtoken}");
                 return !string.IsNullOrEmpty(oauthtoken);
             }

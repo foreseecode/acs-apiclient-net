@@ -173,46 +173,21 @@ namespace AcsApi
                 }
             }
 
-            //// Creating a new instance directly
-            //var client = new OAuthRequest
-            //{
-            //    Method = type,
-            //    Type = OAuthRequestType.ProtectedResource,
-            //    SignatureMethod = OAuthSignatureMethod.HmacSha1,
-            //    ConsumerKey = serviceConfig.ConsumerKey,
-            //    ConsumerSecret = serviceConfig.ConsumerSecret,
-            //    Token = serviceConfig.AccessToken,
-            //    TokenSecret = serviceConfig.AccessTokenSecret,
-            //    RequestUrl = requestUrl
-            //};
-
-            //// Using HTTP header authorization
-            //return client.GetAuthorizationHeader(ParseParamCollection(new Uri(requestUrl)));
-            string loginUrl = this.serviceConfig.ForeseeAuthServiceUri + this.serviceConfig.AccessLogin;
-            var client = new RestClient(loginUrl);
-            var accessRequest = new RestRequest(Method.POST);
-
-            var accessRequestBody = new AccessRequestBody(
-                this.serviceConfig.ConsumerKey,
-                this.serviceConfig.ConsumerSecret,
-                this.serviceConfig.PortalUsername,
-                this.serviceConfig.PortalPassword
-            );
-
-            var jsonBody = JsonConvert.SerializeObject(accessRequestBody);
-            accessRequest.AddParameter("application/json", jsonBody, ParameterType.RequestBody);
-
-            var response = client.Execute(accessRequest);
-            if (!(response.StatusCode == HttpStatusCode.OK))
+            // Creating a new instance directly
+            var client = new OAuthRequest
             {
-                return string.Empty;
-            }
+                Method = type,
+                Type = OAuthRequestType.ProtectedResource,
+                SignatureMethod = OAuthSignatureMethod.HmacSha1,
+                ConsumerKey = serviceConfig.ConsumerKey,
+                ConsumerSecret = serviceConfig.ConsumerSecret,
+                Token = serviceConfig.AccessToken,
+                TokenSecret = serviceConfig.AccessTokenSecret,
+                RequestUrl = requestUrl
+            };
 
-            var result = JsonConvert.DeserializeObject<JObject>(response.Content);
-
-            var oauthToken = result["token"].ToString();
-            Console.WriteLine("Token [{0}]", oauthToken);
-            return oauthToken;
+            // Using HTTP header authorization
+            return client.GetAuthorizationHeader(ParseParamCollection(new Uri(requestUrl)));
         }
 
         public IDictionary<string, string> ParseParamCollection(Uri path)
@@ -375,41 +350,7 @@ namespace AcsApi
                 _response?.Close();
             }
         }
-
-        // bbax: oAuth step 1: request_token
-        private HttpWebResponse RequestToken(OAuthRequest client)
-        {
-            // Using HTTP header authorization
-            var auth = client.GetAuthorizationHeader();
-            var request = (HttpWebRequest)WebRequest.Create(client.RequestUrl);
-
-            request.Headers.Add("Authorization", auth);
-            var response = (HttpWebResponse)request.GetResponse();
-
-            if (response == null)
-            {
-                throw new AcsApiException(AcsApiError.CouldNotAuthToken);
-            }
-            InvokeLog("Client token " + response);
-            return response;
-        }
-
-        private string GetResponseFromWebResponseWrapped(WebResponseWrapper responseWrapper)
-        {
-            string responseText;
-            using (var tokenResponseWrapper = new StreamWrapper(responseWrapper.Get().GetResponseStream()))
-            {
-                InvokeLog("Token Response: " + tokenResponseWrapper.Get());
-                if (tokenResponseWrapper.Get() == null) { throw new AcsApiException(AcsApiError.CouldNotGetAccesstoken); }
-                using (var reader = new StreamReader(tokenResponseWrapper.Get(), Encoding.ASCII))
-                {
-                    responseText = reader.ReadToEnd();
-                    reader.Close();
-                }
-            }
-            return responseText;
-        }
-
+        
         private HttpWebRequest Login(OAuthRequest client, string responseCookies, Hashtable fields)
         {
             client.Token = fields[OauthTokenKey].ToString();
@@ -450,110 +391,12 @@ namespace AcsApi
             return myHttpWebRequest;
         }
 
-        private HttpWebResponse ConsumerHandshake(OAuthRequest client, string jsessionid, string setCookieHeader, string domain)
-        {
-            var authReq =
-                (HttpWebRequest)
-                    WebRequest.Create(serviceConfig.ServerRoot + AcsApiClientConfig.AuthUrl + "?" + OauthTokenKey + "=" +
-                                      HttpUtility.UrlEncode(client.Token));
-
-            authReq.AllowAutoRedirect = false;
-            authReq.CookieContainer = new CookieContainer();
-
-            authReq.CookieContainer.Add(new Cookie(SessionIdKey.ToUpper(), jsessionid) { Domain = domain });
-            authReq.CookieContainer.Add(new Cookie(ConsumerTypeIdKey, ConsumerTypeValue) { Domain = domain });
-
-            cookies.Add(new Cookie(ConsumerTypeIdKey, ConsumerTypeValue, "/", domain));
-
-            CookieCollection newRequiredCookies = new CookieCollection();
-            try
-            {
-                newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(setCookieHeader,
-                    new Uri(serviceConfig.ServerRoot).Host);
-            }
-            catch (Exception e)
-            {
-                throw new AcsApiException("Could not parse cookie for final request!");
-            }
-            RefreshCookies(newRequiredCookies, authReq);
-
-            HttpWebResponse authReqResp;
-            try
-            {
-                authReqResp = authReq.GetResponse() as HttpWebResponse;
-            }
-            catch (WebException wex)
-            {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
-            }
-
-            // bbax: response streams being closed while dealing with exceptions... yey..
-            // todo: clean this up more...
-            if (authReqResp?.Headers == null)
-            {
-                authReqResp?.Close();
-                throw new AcsApiException(AcsApiError.CouldNotLogin);
-            }
-            return authReqResp;
-        }
-
-        private HttpWebResponse RequestFinal(OAuthRequest client, string accessToken, string oauthVerifier, string cdomain, string consumerCookies)
-        {
-            client.Token = accessToken;
-            client.Type = OAuthRequestType.AccessToken;
-            client.Verifier = oauthVerifier;
-            client.RequestUrl = serviceConfig.ServerRoot + AcsApiClientConfig.AccessUrl;
-            client.CallbackUrl = null;
-            client.TokenSecret = HttpUtility.UrlDecode(client.TokenSecret);
-            var auth = client.GetAuthorizationHeader();
-
-            var accessTokenRequest = (HttpWebRequest)WebRequest.Create(serviceConfig.ServerRoot + AcsApiClientConfig.AccessUrl);
-            accessTokenRequest.Method = "GET";
-            accessTokenRequest.Headers.Add("Authorization", auth);
-            accessTokenRequest.CookieContainer = new CookieContainer();
-            //accessTokenRequest.CookieContainer.Add(new Cookie(ConsumerTypeIdKey, ConsumerTypeValue) { Domain = cdomain });
-
-            CookieCollection newRequiredCookies = new CookieCollection();
-            try
-            {
-                newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(consumerCookies,
-                    new Uri(serviceConfig.ServerRoot).Host);
-            }
-            catch (Exception e)
-            {
-                throw new AcsApiException("Could not parse cookie for final request!");
-            }
-            RefreshCookies(newRequiredCookies, accessTokenRequest);
-
-            accessTokenRequest.AllowAutoRedirect = false;
-
-            HttpWebResponse accessTokenResponse = null;
-
-            try
-            {
-                accessTokenResponse = (HttpWebResponse)accessTokenRequest.GetResponse();
-            }
-            catch (WebException wex)
-            {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
-            }
-            return accessTokenResponse;
-        }
-
         /// <summary>
         /// Get an access token
         /// </summary>
         private void GetToken()
         {
-            if (_acsPortal)
-            {
-                LoadAcsToken();
-            }
-            else
-            {
-                LoadFssToken();
-            }
-            
+            LoadToken();
         }
 
         // bbax: case matters... 
@@ -572,7 +415,7 @@ namespace AcsApi
             public string secret { get; set; }
         }
 
-        private void LoadAcsToken()
+        private void LoadToken()
         {
             var requestDetails = new LoginRequestToken
             {
@@ -600,124 +443,6 @@ namespace AcsApi
             }
             serviceConfig.AccessTokenSecret = unmarshalledResponse.secret;
             serviceConfig.AccessToken = unmarshalledResponse.token;
-        }
-
-        private void LoadFssToken()
-        {
-            // Creating a new instance directly
-            var client = new OAuthRequest
-            {
-                Method = "GET",
-                Type = OAuthRequestType.RequestToken,
-                SignatureMethod = OAuthSignatureMethod.HmacSha1,
-                ConsumerKey = serviceConfig.ConsumerKey,
-                ConsumerSecret = serviceConfig.ConsumerSecret,
-                RequestUrl = serviceConfig.ServerRoot + AcsApiClientConfig.RequestUrl,
-                CallbackUrl = serviceConfig.ServerRoot + "client"
-            };
-
-
-            //CookieCollection responseCookies = null;
-            string setCookieHeader;
-            var fields = new Hashtable();
-            using (var responseWrapper = new WebResponseWrapper(RequestToken(client)))
-            {
-                var responseText = GetResponseFromWebResponseWrapped(responseWrapper);
-
-                for (var i = 0; i < responseText.Split('&').Length; i++)
-                {
-                    var fieldInfo = responseText.Split('&')[i].Split('=');
-                    fields[fieldInfo[0]] = fieldInfo[1];
-                }
-
-                //responseCookies = responseWrapper.Get().Cookies;
-                setCookieHeader = responseWrapper.Get().Headers["Set-Cookie"];
-            }
-
-            var myHttpWebRequest = Login(client, setCookieHeader, fields);
-
-            string jsessionid;
-            setCookieHeader = null;
-            try
-            {
-                using (var responseWrapper = new WebResponseWrapper((HttpWebResponse)myHttpWebRequest.GetResponse()))
-                {
-                    setCookieHeader = responseWrapper.Get().Headers["Set-Cookie"];
-                    var sessionCookie = responseWrapper.Get().Cookies[SessionIdKey];
-                    if (sessionCookie != null)
-                    {
-                        jsessionid = sessionCookie.Value;
-
-                        InvokeLog("Jsesssion found at " + jsessionid);
-                        cookies.Add(sessionCookie);
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("JSession Id returned null!");
-                    }
-                }
-            }
-            catch (WebException wex)
-            {
-                throw new AcsApiException(AcsApiError.ServerError.ToString(), wex);
-            }
-
-            var target = new Uri(serviceConfig.ServerRoot);
-            var cdomain = target.Host;
-
-            string[] locations;
-            using (var responseWrapper = new WebResponseWrapper(ConsumerHandshake(client, jsessionid, setCookieHeader, cdomain)))
-            {
-                locations = responseWrapper.Get().Headers.GetValues("location");
-                setCookieHeader = responseWrapper.Get().Headers["Set-Cookie"];
-            }
-
-            if (locations == null)
-            {
-                throw new AcsApiException(AcsApiError.CouldNotLogin);
-            }
-
-            var myUri = new Uri(locations.FirstOrDefault() ?? string.Empty);
-            InvokeLog("Request for uri" + myUri);
-            if (string.IsNullOrEmpty(myUri.Query))
-            {
-                // No oauth_token or oauth_verifier in location header, so didn't authenticate.
-                throw new AcsApiException(AcsApiError.CouldNotLogin);
-            }
-
-            var accessToken = HttpUtility.ParseQueryString(myUri.Query).Get(OauthTokenKey);
-            var oauthVerifier = HttpUtility.ParseQueryString(myUri.Query).Get(OauthVerifierKey);
-
-            InvokeLog("Verifier response " + accessToken + " : " + oauthVerifier);
-
-            if (string.IsNullOrEmpty(oauthVerifier))
-            {
-                throw new AcsApiException(AcsApiError.CouldNotFindVerifier);
-            }
-
-            using (var requestWrapper = new WebResponseWrapper(RequestFinal(client, accessToken, oauthVerifier, cdomain, setCookieHeader)))
-            {
-                using (var responseStream = new StreamWrapper(requestWrapper.Get().GetResponseStream()))
-                {
-                    if (responseStream.Get() == null)
-                    {
-                        throw new AcsApiException(AcsApiError.CouldNotGetAccesstoken);
-                    }
-
-                    string responseOutput;
-
-                    // Pipes the stream to a higher level stream reader with the required encoding format. 
-                    using (var readStream = new StreamReader(responseStream.Get(), Encoding.UTF8))
-                    {
-                        responseOutput = readStream.ReadToEnd();
-                    }
-
-                    serviceConfig.AccessToken = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenKey);
-                    serviceConfig.AccessTokenSecret = HttpUtility.ParseQueryString(responseOutput).Get(OauthTokenSecretKey);
-
-                    InvokeLog("Final Tokens: " + serviceConfig.AccessToken + " : " + serviceConfig.AccessTokenSecret);
-                }
-            }
         }
     }
 }
