@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{7E474BA8-94D9-4997-A9B0-505C581ABBB6}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClientConfig.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
     <Files>
-      <File FileName="acs-apiclient/AcsApiClient.cs" Line="428" Column="1" />
-      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="60" Column="46" />
+      <File FileName="acs-apiclient/AcsApiClient.cs" Line="167" Column="27" />
+      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="60" Column="16" />
       <File FileName="OAuth/src/OAuth/OAuthRequest.cs" Line="48" Column="31" />
-      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="112" Column="16" />
-      <File FileName="acs-apiclient/AccessRequestBody.cs" Line="11" Column="1" />
-      <File FileName="Samples/MyClass.cs" Line="31" Column="40" />
+      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="115" Column="51" />
+      <File FileName="Samples/MyClass.cs" Line="61" Column="62" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -21,11 +20,11 @@
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="41" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="18" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/MyClass.cs" relfile="UnitTests/MyClass.cs" line="36" column="1" />
-      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="434" column="1" />
-      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="56" column="1" />
-      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="428" column="1" />
-      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="41" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="382" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="67" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="376" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="52" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="63" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
