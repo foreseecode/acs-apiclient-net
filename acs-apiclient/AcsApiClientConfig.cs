@@ -43,11 +43,6 @@ namespace AcsApi
         public string ForeseeAuthServiceUri { get; set; } = "https://services-edge.foresee.com/";
         
         /// <summary>
-        /// The services login
-        /// </summary>
-        internal const string ServicesLoginUrl = "login";
-
-        /// <summary>
         /// acs services login path
         /// </summary>
         internal const string AcsServicesLoginUrl = "access";
@@ -109,10 +104,10 @@ namespace AcsApi
         }
         
         public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword,
-            string foreseeAuthServiceUri, string servicesUri) : this(consumerKey, consumerSecret, portalUsername, portalPassword)
+            string foreseeAuthServiceUri, string foreseeAuthServicesUri) : this(consumerKey, consumerSecret, portalUsername, portalPassword)
         {
             this.ForeseeAuthServiceUri = foreseeAuthServiceUri;
-            this.ForeseeServicesUri = servicesUri;
+            this.ForeseeServicesUri = foreseeAuthServicesUri;
         }
     }
 }

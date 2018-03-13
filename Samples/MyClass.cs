@@ -30,18 +30,6 @@ namespace UnitTests
             * Expected Result: Successfully get token
             */
             GetToken("***REMOVED***", "***REMOVED***", "https://services-edge-dev.foresee.com", "https://portal2.foreseeresults.com");
-            
-            /*
-            * Scenario: Get token from QA
-            * Expected Result: AcsApiException(AcsApiError.CouldNotLogin) is thrown
-            */
-            GetToken("nancy.shanley", "1ForeSee", "https://services-edge-qa.foresee.com/access","https://portal2-qa.foreseeresults.com");
-            
-            /*
-            * Scenario: Get token from STG
-            * Expected Result: AcsApiException(AcsApiError.CouldNotLogin) is thrown
-            */
-            GetToken("mobile-team@foresee.com", "1", "https://services-edge-stg.foresee.com/access","https://portal2-stg.foreseeresults.com");
         }
 
         private static void GetToken(string username, string password, string authenticationBaseUrl, string serviceBaseUrl)

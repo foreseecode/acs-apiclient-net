@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{7E474BA8-94D9-4997-A9B0-505C581ABBB6}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
     <Files>
-      <File FileName="acs-apiclient/AcsApiClient.cs" Line="167" Column="27" />
-      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="60" Column="16" />
-      <File FileName="OAuth/src/OAuth/OAuthRequest.cs" Line="48" Column="31" />
-      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="115" Column="51" />
+      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="39" Column="35" />
+      <File FileName="OAuth/src/OAuth/OAuthRequest.cs" Line="37" Column="23" />
+      <File FileName="acs-apiclient/AcsApiClient.cs" Line="157" Column="46" />
+      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="115" Column="36" />
       <File FileName="Samples/MyClass.cs" Line="61" Column="62" />
     </Files>
   </MonoDevelop.Ide.Workbench>
