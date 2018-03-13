@@ -41,6 +41,5 @@
   <MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.0B3A7A17-6986-4348-8D1F-23E370E311B1">
     <MonoDevelop.MacDev.AppleDevelopmentTeam />
   </MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests>
-  <MonoDevelop.Ide.ItemProperties.Samples PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
