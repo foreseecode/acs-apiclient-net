@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "acs-apiclient-ios", "acs-ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{7E474BA8-94D9-4997-A9B0-505C581ABBB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidUnitTests", "AndroidUnitTests\AndroidUnitTests.csproj", "{561FE103-6331-47B0-9BB6-F6D67702113C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "acs-apiclient_android_UnitTests", "AndroidUnitTests\acs-apiclient_android_UnitTests.csproj", "{561FE103-6331-47B0-9BB6-F6D67702113C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

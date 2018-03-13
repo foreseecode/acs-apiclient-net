@@ -44,9 +44,8 @@ namespace AndroidUnitTests
         {
             try
             {
-                string url = $"{serviceBaseUrl}" + "/currentUser/";
-                var uri = new Uri(url);
-                var oauthtoken = client.GetAuthHeadersForRequestByType(url, "GET");
+                string currentUserUrl = $"{serviceBaseUrl}" + "/currentUser/";
+                var oauthtoken = client.GetAuthHeadersForRequestByType(currentUserUrl, "GET");
                 Console.WriteLine($"token={oauthtoken}");
                 return !string.IsNullOrEmpty(oauthtoken);
             }
