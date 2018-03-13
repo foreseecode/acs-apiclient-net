@@ -10,32 +10,50 @@ namespace UnitTests
 
         static void Main(string[] args)
         {
-            string baseUrlDoesNotProvideToken = "https://portal2.foreseeresults.com/services/";
+            /*
+            * Scenario: Get token from PROD
+            * Expected Result: Successfully get token
+            */
             string baseUrlForPROD = "https://services-edge.foresee.com/";
-            var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret,
-                baseUrlForPROD, "***REMOVED***", "***REMOVED***");
-
-            var foreseeClient = new AcsApiClient(clientConfig);
-            bool hasToken = HasOAuthToken(foreseeClient);
-            Console.WriteLine($"hasOAuthToken: {hasToken}");
+            GetToken(baseUrlForPROD, "***REMOVED***", "***REMOVED***");
             
-            //foreseeClient.GetAuthHeadersForRequest();
+             /*
+            * Scenario: Get token from DEV
+            * Expected Result: Successfully get token
+            */
+            string baseUrlForDEV = "https://services-edge-dev.foresee.com/";
+            GetToken(baseUrlForDEV, "***REMOVED***", "***REMOVED***");
+            
+            /*
+            * Scenario: Get token from Portal 2
+            * Expected Result: AcsApiException(AcsApiError.CouldNotLogin) is thrown
+            */
+            string baseUrlForPortal2 = "https://portal2.foreseeresults.com/";
+            GetToken(baseUrlForPortal2, "1", "1");
         }
 
-        static bool HasOAuthToken(IAcsApiClient client)
+        private static void GetToken(string baseUrl, string username, string password)
+        {
+            var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret,
+                baseUrl, username, password);
+            var foreseeClient = new AcsApiClient(clientConfig);
+            bool hasToken = HasOAuthToken(foreseeClient, baseUrl);
+            Console.WriteLine($"{baseUrl} hasOAuthToken: {hasToken}");
+        }
+
+        static bool HasOAuthToken(IAcsApiClient client, string baseUrl)
         {
             try
             {
-                const string UrlDoesNotProvideToken = "https://portal2.foreseeresults.com/services/currentUser/";
-                const string urlForPROD = "https://services-edge.foresee.com/currentUser/";
-                var uri = new Uri(urlForPROD);
-                var oauthtoken = client.GetAuthHeadersForRequestByType(urlForPROD, "GET");
+                string url = $"{baseUrl}" + "/currentUser/";
+                var uri = new Uri(url);
+                var oauthtoken = client.GetAuthHeadersForRequestByType(url, "GET");
                 Console.WriteLine($"token={oauthtoken}");
                 return !string.IsNullOrEmpty(oauthtoken);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine( $"{baseUrl}" + e);
                 return false;
             }
         }

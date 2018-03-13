@@ -160,7 +160,7 @@ namespace AcsApi
             {
                 try
                 {
-                    GetToken();
+                    LoadToken();
                 }
                 catch (AcsApiException ex)
                 {
@@ -223,7 +223,7 @@ namespace AcsApi
         {
             try
             {
-                GetToken();
+                LoadToken();
             }
             catch (AcsApiException)
             {
@@ -389,14 +389,6 @@ namespace AcsApi
                 requestStream.Close();
             }
             return myHttpWebRequest;
-        }
-
-        /// <summary>
-        /// Get an access token
-        /// </summary>
-        private void GetToken()
-        {
-            LoadToken();
         }
 
         // bbax: case matters... 

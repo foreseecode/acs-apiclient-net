@@ -41,7 +41,7 @@ namespace AcsApi
         
         /* Auth URI: For the purpose of this library the services URI is still the above.
         Only the authentication URI is changing */
-        public string ForeseeAuthServiceUri = "https://services-edge.foresee.com/";
+        public string ForeseeAuthServiceUri { get; set; } = "https://services-edge.foresee.com/";
         
         /* URI for the Login Call */
         public string AccessLogin = "access";
