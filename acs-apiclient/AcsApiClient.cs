@@ -288,18 +288,6 @@ namespace AcsApi
 
         }
 
-        private void RefreshCookies(CookieCollection responseCollection, HttpWebRequest request)
-        {
-            if (request.CookieContainer == null)
-            {
-                request.CookieContainer = new CookieContainer();
-            }
-            foreach (Cookie cookie in responseCollection)
-            {
-                request.CookieContainer.Add(cookie);
-            }
-        }
-
         public sealed class StreamWrapper : IDisposable
         {
             private readonly Stream _stream;
@@ -351,46 +339,6 @@ namespace AcsApi
             }
         }
         
-        private HttpWebRequest Login(OAuthRequest client, string responseCookies, Hashtable fields)
-        {
-            client.Token = fields[OauthTokenKey].ToString();
-            client.TokenSecret = fields[OauthTokenSecretKey].ToString();
-
-            InvokeLog("Token and Sec: " + client.Token + " : " + client.TokenSecret);
-
-            var ascii = new ASCIIEncoding();
-            var postData =
-                ascii.GetBytes("j_username=" + HttpUtility.UrlEncode(serviceConfig.PortalUsername) + "&j_password=" +
-                               HttpUtility.UrlEncode(serviceConfig.PortalPassword));
-
-            var myHttpWebRequest =
-                (HttpWebRequest)WebRequest.Create(serviceConfig.ServerRoot + AcsApiClientConfig.ServicesLoginUrl);
-            myHttpWebRequest.Method = "POST";
-            myHttpWebRequest.AllowAutoRedirect = false;
-            myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
-            myHttpWebRequest.ContentLength = postData.Length;
-            myHttpWebRequest.CookieContainer = new CookieContainer();
-
-            CookieCollection newRequiredCookies = new CookieCollection();
-            try
-            {
-                newRequiredCookies = AcsApiSetCookieHeaderParser.GetAllCookiesFromHeader(responseCookies,
-                    new Uri(serviceConfig.ServerRoot).Host);
-            }
-            catch (Exception e)
-            {
-                throw new AcsApiException("Could not parse cookie for final request!");
-            }
-            RefreshCookies(newRequiredCookies, myHttpWebRequest);
-
-            using (var requestStream = myHttpWebRequest.GetRequestStream())
-            {
-                requestStream.Write(postData, 0, postData.Length);
-                requestStream.Close();
-            }
-            return myHttpWebRequest;
-        }
-
         // bbax: case matters... 
         internal class LoginRequestToken
         {
@@ -418,7 +366,7 @@ namespace AcsApi
             };
 
             var loginRequest = JsonConvert.SerializeObject(requestDetails);
-            var client = new RestClient(serviceConfig.ServerRoot);
+            var client = new RestClient(serviceConfig.ForeseeAuthServiceUri);
             var request = new RestRequest(AcsApiClientConfig.AcsServicesLoginUrl, Method.POST);
             request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
 

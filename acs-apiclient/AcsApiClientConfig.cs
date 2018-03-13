@@ -35,16 +35,12 @@ namespace AcsApi
     /// </summary>
     public class AcsApiClientConfig
     {
-        
         /* Legacy Foresee Services URI - To be retired*/
         public string ForeseeServicesUri { get; set; } = "https://portal2.foreseeresults.com/services/";
         
         /* Auth URI: For the purpose of this library the services URI is still the above.
         Only the authentication URI is changing */
         public string ForeseeAuthServiceUri { get; set; } = "https://services-edge.foresee.com/";
-        
-        /* URI for the Login Call */
-        public string AccessLogin = "access";
         
         /// <summary>
         /// The services login
@@ -65,11 +61,6 @@ namespace AcsApi
         /// The password
         /// </summary>
         internal readonly string PortalPassword;
-
-        /// <summary>
-        /// Base url
-        /// </summary>
-        internal readonly string ServerRoot;
 
         /// <summary>
         /// OAuth Consumer Key
@@ -109,20 +100,19 @@ namespace AcsApi
         /// <param name="portalPassword">
         /// The password for ACS portal services.
         /// </param>
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword)
+        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword)
         {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
-            this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
         }
         
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword,
-            string foreseeAuthServiceUri, string servicesUri) : this(consumerKey, consumerSecret, serverRoot, portalUsername, portalPassword)
+        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword,
+            string foreseeAuthServiceUri, string servicesUri) : this(consumerKey, consumerSecret, portalUsername, portalPassword)
         {
-            ForeseeAuthServiceUri = foreseeAuthServiceUri;
-            ForeseeServicesUri = servicesUri;
+            this.ForeseeAuthServiceUri = foreseeAuthServiceUri;
+            this.ForeseeServicesUri = servicesUri;
         }
     }
 }

@@ -7,38 +7,49 @@ namespace UnitTests
     {
         public const string ConsumerKey = "***REMOVED***";
         public const string ConsumerSecret = "***REMOVED***";
-
+        
+        //https://services-edge.foresee.com (Prod)
+        //https://services-edge-stg.foresee.com (Staging)
+        //https://services-edge-qa.foresee.com (QA)
+        //https://services-edge-dev.foresee.com (DEV)
+        //https://portal2.foreseeresults.com (Prod)
+        //https://portal2-stg.foreseeresults.com (Staging)
+        //https://portal2-qa.foreseeresults.com (QA)
+        //https://portal2-dev-aws.foreseeresults.com (DEV)
+        
         static void Main(string[] args)
         {
             /*
             * Scenario: Get token from PROD
             * Expected Result: Successfully get token
             */
-            string baseUrlForPROD = "https://services-edge.foresee.com/";
-            GetToken(baseUrlForPROD, "***REMOVED***", "***REMOVED***");
-            
+            GetToken("***REMOVED***", "***REMOVED***", "https://services-edge.foresee.com", "https://portal2.foreseeresults.com");
+
              /*
             * Scenario: Get token from DEV
             * Expected Result: Successfully get token
             */
-            string baseUrlForDEV = "https://services-edge-dev.foresee.com/";
-            GetToken(baseUrlForDEV, "***REMOVED***", "***REMOVED***");
+            GetToken("***REMOVED***", "***REMOVED***", "https://services-edge-dev.foresee.com", "https://portal2.foreseeresults.com");
             
             /*
-            * Scenario: Get token from Portal 2
+            * Scenario: Get token from QA
             * Expected Result: AcsApiException(AcsApiError.CouldNotLogin) is thrown
             */
-            string baseUrlForPortal2 = "https://portal2.foreseeresults.com/";
-            GetToken(baseUrlForPortal2, "1", "1");
+            GetToken("nancy.shanley", "1ForeSee", "https://services-edge-qa.foresee.com/access","https://portal2-qa.foreseeresults.com");
+            
+            /*
+            * Scenario: Get token from STG
+            * Expected Result: AcsApiException(AcsApiError.CouldNotLogin) is thrown
+            */
+            GetToken("mobile-team@foresee.com", "1", "https://services-edge-stg.foresee.com/access","https://portal2-stg.foreseeresults.com");
         }
 
-        private static void GetToken(string baseUrl, string username, string password)
+        private static void GetToken(string username, string password, string authenticationBaseUrl, string serviceBaseUrl)
         {
-            var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret,
-                baseUrl, username, password);
+            var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, authenticationBaseUrl, serviceBaseUrl);
             var foreseeClient = new AcsApiClient(clientConfig);
-            bool hasToken = HasOAuthToken(foreseeClient, baseUrl);
-            Console.WriteLine($"{baseUrl} hasOAuthToken: {hasToken}");
+            bool hasToken = HasOAuthToken(foreseeClient, authenticationBaseUrl);
+            Console.WriteLine($"{authenticationBaseUrl} hasOAuthToken: {hasToken}");
         }
 
         static bool HasOAuthToken(IAcsApiClient client, string baseUrl)
