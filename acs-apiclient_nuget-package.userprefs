@@ -1,13 +1,11 @@
-﻿<Properties StartupConfiguration="{561FE103-6331-47B0-9BB6-F6D67702113C}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Samples/MyClass.cs">
+﻿<Properties StartupConfiguration="{530A7F1D-CB33-4222-AAB7-CF330A43154E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
     <Files>
-      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="39" Column="35" />
-      <File FileName="OAuth/src/OAuth/OAuthRequest.cs" Line="37" Column="23" />
-      <File FileName="acs-apiclient/AcsApiClient.cs" Line="369" Column="55" />
-      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="109" Column="18" />
-      <File FileName="Samples/MyClass.cs" Line="51" Column="1" />
-      <File FileName="AndroidUnitTests/TestsSample.cs" Line="8" Column="24" />
-      <File FileName="AndroidUnitTests/MainActivity.cs" Line="1" Column="1" />
+      <File FileName="acs-apiclient/packages.config" Line="5" Column="12" />
+      <File FileName="AndroidUnitTests/TestsSample.cs" Line="7" Column="1" />
+      <File FileName="acs-apiclient-ios_UnitTests/UnitTestAppDelegate.cs" Line="35" Column="1" />
+      <File FileName="acs-apiclient-ios_UnitTests/Tests.cs" Line="49" Column="1" />
+      <File FileName="acs-apiclient/AcsApiClient.cs" Line="170" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.acs-apiclient__android__UnitTests PreferredExecutionTarget="Android.Nexus_S_API24" />
@@ -28,9 +26,21 @@
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient/AcsApiClient.cs" relfile="acs-apiclient/AcsApiClient.cs" line="376" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="40" column="1" />
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/Samples/MyClass.cs" relfile="Samples/MyClass.cs" line="51" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/AndroidUnitTests/TestsSample.cs" relfile="AndroidUnitTests/TestsSample.cs" line="24" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/AndroidUnitTests/TestsSample.cs" relfile="AndroidUnitTests/TestsSample.cs" line="31" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/TestsSample.cs" relfile="acs-apiclient-ios_UnitTests/TestsSample.cs" line="23" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/TestsSample.cs" relfile="acs-apiclient-ios_UnitTests/TestsSample.cs" line="30" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/Tests.cs" relfile="acs-apiclient-ios_UnitTests/Tests.cs" line="25" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/Tests.cs" relfile="acs-apiclient-ios_UnitTests/Tests.cs" line="32" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/Tests.cs" relfile="acs-apiclient-ios_UnitTests/Tests.cs" line="56" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/Tests.cs" relfile="acs-apiclient-ios_UnitTests/Tests.cs" line="49" column="1" />
+      <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/Tests.cs" relfile="acs-apiclient-ios_UnitTests/Tests.cs" line="39" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.0B3A7A17-6986-4348-8D1F-23E370E311B1">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam />
+  </MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests>
   <MonoDevelop.Ide.ItemProperties.Samples PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
