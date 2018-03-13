@@ -5,18 +5,11 @@ using NUnit.Framework;
 namespace AndroidUnitTests
 {
     [TestFixture]
-    public class TestsSample
+    public class Tests
     {
         public const string ConsumerKey = "***REMOVED***";
         public const string ConsumerSecret = "***REMOVED***";
         
-        [SetUp]
-        public void Setup() { }
-
-
-        [TearDown]
-        public void Tear() { }
-
         [Test]
         public void AuthenticateOnPROD()
         {

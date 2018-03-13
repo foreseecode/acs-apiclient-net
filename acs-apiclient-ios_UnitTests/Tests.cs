@@ -11,13 +11,6 @@ namespace acsapiclientios_UnitTests
         public const string ConsumerKey = "***REMOVED***";
         public const string ConsumerSecret = "***REMOVED***";
         
-        [SetUp]
-        public void Setup() { }
-
-
-        [TearDown]
-        public void Tear() { }
-
         [Test]
         public void AuthenticateOnPROD()
         {
