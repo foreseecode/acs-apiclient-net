@@ -78,20 +78,6 @@ namespace AcsApi
         /// </summary>
         private const string SessionIdKey = "jsessionid";
 
-        public event Action<string> Log;
-
-        private void InvokeLog(string str)
-        {
-            if (Log != null)
-            {
-                Log(str);
-            }
-            else
-            {
-                Console.WriteLine("INFO [{0}]", str);
-            }
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClient"/> class. 
         /// </summary>
