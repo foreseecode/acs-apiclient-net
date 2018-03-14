@@ -333,7 +333,7 @@ namespace AcsApi
 
             var loginRequest = JsonConvert.SerializeObject(requestDetails);
             var client = new RestClient(serviceConfig.AuthServiceUri);
-            var request = new RestRequest(AcsApiClientConfig.LoginUrl, Method.POST);
+            var request = new RestRequest(AcsApiClientConfig.AccessUrl, Method.POST);
             request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
 
             var response = client.Execute(request);

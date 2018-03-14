@@ -41,9 +41,9 @@ namespace AcsApi
         public string AuthServiceUri { get; set; }
         
         /// <summary>
-        /// URI for the Login Call
+        /// URI for the access call
         /// </summary>
-        internal const string LoginUrl = "access";
+        internal const string AccessUrl = "access";
 
         /// <summary>
         /// The username
