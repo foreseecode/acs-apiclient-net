@@ -346,8 +346,8 @@ namespace AcsApi
             };
 
             var loginRequest = JsonConvert.SerializeObject(requestDetails);
-            var client = new RestClient(serviceConfig.ForeseeAuthServiceUri);
-            var request = new RestRequest(AcsApiClientConfig.AcsServicesLoginUrl, Method.POST);
+            var client = new RestClient(serviceConfig.AuthServiceUri);
+            var request = new RestRequest(AcsApiClientConfig.LoginUrl, Method.POST);
             request.AddParameter("application/json", loginRequest, ParameterType.RequestBody);
 
             var response = client.Execute(request);

@@ -14,46 +14,43 @@ namespace acsapiclientios_UnitTests
         [Test]
         public void AuthenticateOnPROD()
         {
-            bool hasToken = HasToken("***REMOVED***", "***REMOVED***");
+            AcsApiClientConfig clientConfig 
+            = new AcsApiClientConfig(
+            ConsumerKey, 
+            ConsumerSecret, 
+            "***REMOVED***", 
+            "***REMOVED***");
+            string requestUrl = "https://portal2.foreseeresults.com/currentUser/";
+            bool hasToken = HasToken(clientConfig, requestUrl);
             Assert.True(hasToken);
         }
 
         [Test]
         public void AuthenticateOnDEV()
         {
-            bool hasToken = HasToken("***REMOVED***", "***REMOVED***", "https://portal2.foreseeresults.com", ForeSeeEnvironment.Dev);
+            AcsApiClientConfig clientConfig 
+            = new AcsApiClientConfig(
+            ConsumerKey, 
+            ConsumerSecret, 
+            "***REMOVED***", 
+            "***REMOVED***", 
+            ForeSeeEnvironment.Dev);
+            string requestUrl = "https://portal2-dev-aws.foreseeresults.com/currentUser/";
+            bool hasToken = HasToken(clientConfig, requestUrl);
             Assert.True(hasToken);
         }
         
-        static bool HasToken(string username, string password, string serviceBaseUrl = "", ForeSeeEnvironment environment = ForeSeeEnvironment.Prod)
+        static bool HasToken(AcsApiClientConfig clientConfig, string requestUrl)
         {
-            AcsApiClientConfig clientConfig;
-            if(!string.IsNullOrEmpty(serviceBaseUrl))
-            {
-                clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, serviceBaseUrl, environment);
-            }
-            else
-            {
-                clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, environment);
-            }
-            var foreseeClient = new AcsApiClient(clientConfig);
-            bool hasToken = HasOAuthToken(foreseeClient, serviceBaseUrl);
-            Console.WriteLine($"{environment.AuthServiceUri()} hasOAuthToken: {hasToken}");
-            return hasToken;
-        }
-
-        static bool HasOAuthToken(IAcsApiClient client, string serviceBaseUrl)
-        {
+            var client = new AcsApiClient(clientConfig);
             try
             {
-                string currentUserUrl = $"{serviceBaseUrl}" + "/currentUser/";
-                var oauthtoken = client.GetAuthHeadersForRequestByType(currentUserUrl, "GET");
-                Console.WriteLine($"token={oauthtoken}");
+                var oauthtoken = client.GetAuthHeadersForRequestByType(requestUrl, "GET");
                 return !string.IsNullOrEmpty(oauthtoken);
             }
             catch (Exception e)
             {
-                Console.WriteLine( $"{serviceBaseUrl}" + e);
+                Console.WriteLine( $"{requestUrl}: " + e);
                 return false;
             }
         }

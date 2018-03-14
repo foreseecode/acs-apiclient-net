@@ -37,17 +37,13 @@ namespace AcsApi
     /// </summary>
     public class AcsApiClientConfig
     {
-        /* Legacy Foresee Services URI - To be retired*/
-        public string ForeseeServicesUri { get; set; } = "https://portal2.foreseeresults.com/services/";
-        
-        /* Auth URI: For the purpose of this library the services URI is still the above.
-        Only the authentication URI is changing */
-        public string ForeseeAuthServiceUri { get; set; } = ForeSeeEnvironment.Dev.AuthServiceUri();
+        /* the authentication URI*/
+        public string AuthServiceUri { get; set; } = ForeSeeEnvironment.Dev.AuthServiceUri();
         
         /// <summary>
-        /// acs services login path
+        /// URI for the Login Call
         /// </summary>
-        internal const string AcsServicesLoginUrl = "access";
+        internal const string LoginUrl = "access";
 
         /// <summary>
         /// The username
@@ -104,13 +100,7 @@ namespace AcsApi
             this.ConsumerSecret = consumerSecret;
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
-            this.ForeseeAuthServiceUri = environment.AuthServiceUri();
-        }
-        
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword,
-            string servicesUri, ForeSeeEnvironment environment) : this(consumerKey, consumerSecret, portalUsername, portalPassword, environment)
-        {
-            this.ForeseeServicesUri = servicesUri;
+            this.AuthServiceUri = environment.AuthServiceUri();
         }
     }
     
