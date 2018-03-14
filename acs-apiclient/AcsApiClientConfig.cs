@@ -38,7 +38,7 @@ namespace AcsApi
     public class AcsApiClientConfig
     {
         /* the authentication URI*/
-        public string AuthServiceUri { get; set; } = ForeSeeEnvironment.Dev.AuthServiceUri();
+        public string AuthServiceUri { get; set; }
         
         /// <summary>
         /// URI for the Login Call
