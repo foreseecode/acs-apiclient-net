@@ -67,6 +67,7 @@
     <Compile Include="AcsApiException.cs" />
     <Compile Include="AcsApiSetCookieHeaderParser.cs" />
     <Compile Include="IAcsApiClient.cs" />
+    <Compile Include="ForeSeeEnvironment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

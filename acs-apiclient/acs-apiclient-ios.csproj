@@ -50,6 +50,7 @@
     <Compile Include="AcsApiSetCookieHeaderParser.cs" />
     <Compile Include="IAcsApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ForeSeeEnvironment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.CSharp" />

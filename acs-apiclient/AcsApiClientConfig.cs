@@ -26,6 +26,8 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 // ReSharper disable CheckNamespace
+using System;
+
 namespace AcsApi
 // ReSharper restore CheckNamespace
 {
@@ -40,7 +42,7 @@ namespace AcsApi
         
         /* Auth URI: For the purpose of this library the services URI is still the above.
         Only the authentication URI is changing */
-        public string ForeseeAuthServiceUri { get; set; } = "https://services-edge.foresee.com/";
+        public string ForeseeAuthServiceUri { get; set; } = ForeSeeEnvironment.Dev.AuthServiceUri();
         
         /// <summary>
         /// acs services login path
@@ -76,6 +78,7 @@ namespace AcsApi
         /// Gets or sets the Access token secret
         /// </summary>
         public string AccessTokenSecret { get; set; }
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
@@ -95,19 +98,39 @@ namespace AcsApi
         /// <param name="portalPassword">
         /// The password for ACS portal services.
         /// </param>
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword)
+        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword, ForeSeeEnvironment environment = ForeSeeEnvironment.Prod)
         {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
+            this.ForeseeAuthServiceUri = environment.AuthServiceUri();
         }
         
         public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword,
-            string foreseeAuthServiceUri, string foreseeAuthServicesUri) : this(consumerKey, consumerSecret, portalUsername, portalPassword)
+            string servicesUri, ForeSeeEnvironment environment) : this(consumerKey, consumerSecret, portalUsername, portalPassword, environment)
         {
-            this.ForeseeAuthServiceUri = foreseeAuthServiceUri;
-            this.ForeseeServicesUri = foreseeAuthServicesUri;
+            this.ForeseeServicesUri = servicesUri;
+        }
+    }
+    
+    public static class ForeSeeEnvironmentExtension
+    {
+        public static string AuthServiceUri(this ForeSeeEnvironment environment)
+        {
+            switch (environment)
+            {
+                case ForeSeeEnvironment.Prod:
+                    return "https://services-edge.foresee.com";
+                case ForeSeeEnvironment.Staging:
+                    return "https://services-edge-stg.foresee.com";
+                case ForeSeeEnvironment.QA:
+                    return "https://services-edge-qa.foresee.com";
+                case ForeSeeEnvironment.Dev:
+                    return "https://services-edge-dev.foresee.com";
+                default:
+                    throw new ArgumentException($"This {typeof(ForeSeeEnvironment)}={environment} does not have a AuthServiceUri");
+            }
         }
     }
 }

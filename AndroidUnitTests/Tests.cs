@@ -13,23 +13,31 @@ namespace AndroidUnitTests
         [Test]
         public void AuthenticateOnPROD()
         {
-            bool hasToken = HasToken("***REMOVED***", "***REMOVED***", "https://services-edge.foresee.com", "https://portal2.foreseeresults.com");
+            bool hasToken = HasToken("***REMOVED***", "***REMOVED***");
             Assert.True(hasToken);
         }
 
         [Test]
         public void AuthenticateOnDEV()
         {
-            bool hasToken = HasToken("***REMOVED***", "***REMOVED***", "https://services-edge-dev.foresee.com", "https://portal2.foreseeresults.com");
+            bool hasToken = HasToken("***REMOVED***", "***REMOVED***", "https://portal2.foreseeresults.com", ForeSeeEnvironment.Dev);
             Assert.True(hasToken);
         }
         
-        static bool HasToken(string username, string password, string authenticationBaseUrl, string serviceBaseUrl)
+        static bool HasToken(string username, string password, string serviceBaseUrl = "", ForeSeeEnvironment environment = ForeSeeEnvironment.Prod)
         {
-            var clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, authenticationBaseUrl, serviceBaseUrl);
+            AcsApiClientConfig clientConfig;
+            if(!string.IsNullOrEmpty(serviceBaseUrl))
+            {
+                clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, serviceBaseUrl, environment);
+            }
+            else
+            {
+                clientConfig = new AcsApiClientConfig(ConsumerKey, ConsumerSecret, username, password, environment);
+            }
             var foreseeClient = new AcsApiClient(clientConfig);
             bool hasToken = HasOAuthToken(foreseeClient, serviceBaseUrl);
-            Console.WriteLine($"{authenticationBaseUrl} hasOAuthToken: {hasToken}");
+            Console.WriteLine($"{environment.AuthServiceUri()} hasOAuthToken: {hasToken}");
             return hasToken;
         }
 

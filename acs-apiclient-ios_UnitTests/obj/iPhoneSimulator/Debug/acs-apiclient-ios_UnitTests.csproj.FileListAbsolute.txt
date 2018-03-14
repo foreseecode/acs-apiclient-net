@@ -1,9 +1,11 @@
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.exe
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.pdb
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/acs-apiclient.dll
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/Newtonsoft.Json.dll
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/OAuth.dll
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/RestSharp.dll
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/acs-apiclient.pdb
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/Newtonsoft.Json.xml
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/OAuth.pdb
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/RestSharp.xml
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/ibtool/_BundleResourceWithLogicalName.items
@@ -12,9 +14,7 @@
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/coremlc/_PartialAppManifest.items
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/coremlc/_BundleResourceWithLogicalName.items
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/optimized/
+/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.csprojResolveAssemblyReference.cache
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.csproj.CoreCompileInputs.cache
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.exe
 /Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.pdb
-/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/obj/iPhoneSimulator/Debug/acs-apiclient-ios_UnitTests.csprojResolveAssemblyReference.cache
-/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/Newtonsoft.Json.dll
-/Users/shang.wu/Desktop/Projects/acs-apiclient-net/acs-apiclient-ios_UnitTests/bin/iPhoneSimulator/Debug/Newtonsoft.Json.xml
