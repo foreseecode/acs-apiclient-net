@@ -1,19 +1,10 @@
-﻿<Properties StartupConfiguration="{530A7F1D-CB33-4222-AAB7-CF330A43154E}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="acs-apiclient/AcsApiClient.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="OAuth/src/OAuth/OAuth.csproj">
     <Files>
-      <File FileName="acs-apiclient/AcsApiClientConfig.cs" Line="109" Column="30" />
-      <File FileName="acs-apiclient/ForeSeeEnvironment.cs" Line="4" Column="16" />
-      <File FileName="acs-apiclient-ios_UnitTests/Tests.cs" Line="11" Column="1" />
-      <File FileName="acs-apiclient/AcsApiClient.cs" Line="55" Column="30" />
-      <File FileName="AndroidUnitTests/Tests.cs" Line="55" Column="10" />
-      <File FileName="acs-apiclient-ios_UnitTests/UnitTestAppDelegate.cs" Line="1" Column="1" />
-      <File FileName="acs-apiclient-ios_UnitTests/Main.cs" Line="1" Column="1" />
-      <File FileName="acs-apiclient/IAcsApiClient.cs" Line="39" Column="22" />
+      <File FileName="OAuth/src/OAuth/OAuth.csproj" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.acs-apiclient__android__UnitTests PreferredExecutionTarget="Android.Nexus_S_API24" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.OAuth__Android PreferredExecutionTarget="Android.Nexus_S_API24" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/shang.wu/Desktop/Projects/acs-apiclient-net/UnitTests/Tests.cs" relfile="UnitTests/Tests.cs" line="46" column="76" />
@@ -36,8 +27,5 @@
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.0B3A7A17-6986-4348-8D1F-23E370E311B1">
-    <MonoDevelop.MacDev.AppleDevelopmentTeam />
-  </MonoDevelop.Ide.ItemProperties.acs-apiclient-ios__UnitTests>
   <MultiItemStartupConfigurations />
 </Properties>
