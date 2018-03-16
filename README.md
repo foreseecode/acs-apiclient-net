@@ -2,6 +2,19 @@ Answers Cloud Services API Client Library for C#
 ===================
 Helper library for connecting to the Answers Cloud Services (ForeSee in particular) web API in a headless manner from Java. You can use this to simplify connecting to the ACS api without requiring a browser or user interaction to grant access to a particular account.
 
+###Instructions for running the sample app
+1)Find and open /acs-apiclient-net/acs-apiclient.Sample/client_config.json
+2)Where it says "Enter your value", replace with your desired value.
+{
+    "ConsumerKey" : "Enter your value",
+    "ConsumerSecret" : "Enter your value",
+    "UsernameOnProd" : "Enter your value",
+    "PasswordOnProd" : "Enter your value",
+    "UsernameOnDev"  : "Enter your value",
+    "PasswordOnDev"  : "Enter your value"
+}
+2)Save the client_config.json file and run the acs-apiclient.Sample project
+
 ###Simple Usage
 ```C#
 using System;
