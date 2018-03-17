@@ -1,4 +1,4 @@
-﻿//Code taken from: http://snipplr.com/view/4427/ideabubbling.com
+//Code taken from: http://snipplr.com/view/4427/ideabubbling.com
 //No license was attached to the snippet
 using System;
 using System.Collections;

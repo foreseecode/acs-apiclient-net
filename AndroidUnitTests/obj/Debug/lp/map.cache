@@ -1,0 +1,6 @@
+acs_apiclient
+Newtonsoft.Json
+System.Runtime
+Xamarin.Android.NUnitLite
+OAuth
+RestSharp

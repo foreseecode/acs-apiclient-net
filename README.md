@@ -1,83 +1,82 @@
 Answers Cloud Services API Client Library for C#
 ===================
 Helper library for connecting to the Answers Cloud Services (ForeSee in particular) web API in a headless manner from Java. You can use this to simplify connecting to the ACS api without requiring a browser or user interaction to grant access to a particular account.
-###Installation
-Logging Setup
-AcsApiClient contains an event called Log to attach to.
-```C#
-var acsClient = new AcsApiClient(config);
-acsClient.Log += Console.WriteLine;
-```
+
+###Instructions for running the sample app
+1)Find and open /acs-apiclient-net/acs-apiclient.Sample/client_config.json
+2)Where it says "Enter your value", replace with your desired value.
+{
+    "ConsumerKey" : "Enter your value",
+    "ConsumerSecret" : "Enter your value",
+    "UsernameOnProd" : "Enter your value",
+    "PasswordOnProd" : "Enter your value",
+    "UsernameOnDev"  : "Enter your value",
+    "PasswordOnDev"  : "Enter your value"
+}
+2)Save the client_config.json file and run the acs-apiclient.Sample project
 
 ###Simple Usage
 ```C#
-
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using AcsApi;
 
-namespace acs_net40_console_example
+namespace acsapiclient.Sample
 {
-    class Program
+    class MainClass
     {
-        static int MakeCurrentUserRequest(IAcsApiClient client)
+        public const string ConsumerKey = "***REMOVED***";
+        public const string ConsumerSecret = "***REMOVED***";
+        
+        public static void Main(string[] args)
         {
+            Console.WriteLine($"Athentication on PROD was successful: True or false?{AuthenticateOnPROD()}");
+            
+            Console.WriteLine($"Athentication on DEV was successful: True or false?{AuthenticateOnDEV()}");
+        }
+        
+        static bool AuthenticateOnPROD()
+        {
+            AcsApiClientConfig clientConfig
+            = new AcsApiClientConfig(
+            ConsumerKey,
+            ConsumerSecret,
+            "***REMOVED***",
+            "***REMOVED***");
+            string requestUrl = "https://portal2.foreseeresults.com/currentUser/";
+            bool hasToken = HasToken(clientConfig, requestUrl);
+            return hasToken;
+        }
+        
+        static bool AuthenticateOnDEV()
+        {
+            AcsApiClientConfig clientConfig
+            = new AcsApiClientConfig(
+            ConsumerKey,
+            ConsumerSecret,
+            "***REMOVED***",
+            "***REMOVED***",
+            ForeSeeEnvironment.Dev);
+            string requestUrl = "https://portal2-dev-aws.foreseeresults.com/currentUser/";
+            bool hasToken = HasToken(clientConfig, requestUrl);
+            return hasToken;
+        }
+        
+        static bool HasToken(AcsApiClientConfig clientConfig, string requestUrl)
+        {
+            var client = new AcsApiClient(clientConfig);
             try
             {
-                const string url = "https://portal2.foreseeresults.com/services/currentUser/";
-                var uri = new Uri(url);
-                var oauthtoken = client.GetAuthHeadersForRequestByType(url, "GET");
-                if (!oauthtoken.StartsWith("OAuth"))
-                {
-                    throw new InvalidOperationException("OAuth header is incorrectly formatted");
-                }
-
-                var token = oauthtoken.Substring("OAuth ".Length);
-                using (var httpHandler = new HttpClientHandler { AllowAutoRedirect = false })
-                using (var httpClient = new HttpClient(httpHandler))
-                {
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", token);
-                    var response = httpClient.GetAsync(uri);
-                    response.Wait();
-
-                    var body = response.Result.Content.ReadAsStringAsync();
-                    body.Wait();
-
-                    Console.WriteLine("Response: {0}", body.Result);
-                    return (int)response.Result.StatusCode;
-                }
+                var oauthtoken = client.GetAuthHeadersForRequestByType(requestUrl, "GET");
+                return !string.IsNullOrEmpty(oauthtoken);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return -1;
+                Console.WriteLine($"{requestUrl}: " + e);
+                return false;
             }
-        }
-
-        static void Main(string[] args)
-        {
-            var input = "";
-            var clientConfig = new AcsApiClientConfig(consumerKey, consumerSecret,
-                "https://portal2.foreseeresults.com/services/", foreseeProvidedUserName, foreseeProvidedPassword);
-            var foreseeClient = new AcsApiClient(clientConfig);
-            while (input != "quit")
-            {
-                var result = MakeCurrentUserRequest(foreseeClient);
-                if (result != (int)HttpStatusCode.OK)
-                {
-                    Console.WriteLine($"ERROR: Status Code was: {result}");
-                }
-
-                input = Console.ReadLine();
-            }
-            Console.WriteLine("Done");
-            Console.ReadKey(true);
         }
     }
 }
-
 ```
 
 ### Date Usage

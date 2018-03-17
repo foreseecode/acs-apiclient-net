@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Answers Cloud Services" file="AcsApiClientConfig.cs">
 // Copyright (c) 2015 Answers Cloud Services
 // </copyright>
@@ -26,6 +26,8 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 // ReSharper disable CheckNamespace
+using System;
+
 namespace AcsApi
 // ReSharper restore CheckNamespace
 {
@@ -35,31 +37,13 @@ namespace AcsApi
     /// </summary>
     public class AcsApiClientConfig
     {
+        /* the authentication URI*/
+        public string AuthServiceUri { get; set; }
+        
         /// <summary>
-        /// Request token URL
+        /// URI for the access call
         /// </summary>
-        internal const string RequestUrl = "oauth/request_token";
-
-        /// <summary>
-        /// Authorization URL
-        /// </summary>
-        internal const string AuthUrl = "oauth/user_authorization";
-
-        /// <summary>
-        /// Request access token URL
-        /// </summary>
-        internal const string AccessUrl = "oauth/access_token";
-
-        /// <summary>
-        /// The services login
-        /// </summary>
-        internal const string ServicesLoginUrl = "login";
-
-        /// <summary>
-        /// acs services login path
-        /// </summary>
-        internal const string AcsServicesLoginUrl = "access";
-
+        internal const string AccessUrl = "access";
 
         /// <summary>
         /// The username
@@ -70,11 +54,6 @@ namespace AcsApi
         /// The password
         /// </summary>
         internal readonly string PortalPassword;
-
-        /// <summary>
-        /// Base url
-        /// </summary>
-        internal readonly string ServerRoot;
 
         /// <summary>
         /// OAuth Consumer Key
@@ -95,6 +74,7 @@ namespace AcsApi
         /// Gets or sets the Access token secret
         /// </summary>
         public string AccessTokenSecret { get; set; }
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AcsApiClientConfig"/> class. 
@@ -114,13 +94,33 @@ namespace AcsApi
         /// <param name="portalPassword">
         /// The password for ACS portal services.
         /// </param>
-        public AcsApiClientConfig(string consumerKey, string consumerSecret, string serverRoot, string portalUsername, string portalPassword)
+        public AcsApiClientConfig(string consumerKey, string consumerSecret, string portalUsername, string portalPassword, ForeSeeEnvironment environment = ForeSeeEnvironment.Prod)
         {
             this.ConsumerKey = consumerKey;
             this.ConsumerSecret = consumerSecret;
-            this.ServerRoot = serverRoot.EndsWith("/") ? serverRoot : serverRoot + "/";
             this.PortalUsername = portalUsername;
             this.PortalPassword = portalPassword;
+            this.AuthServiceUri = environment.AuthServiceUri();
+        }
+    }
+    
+    public static class ForeSeeEnvironmentExtension
+    {
+        public static string AuthServiceUri(this ForeSeeEnvironment environment)
+        {
+            switch (environment)
+            {
+                case ForeSeeEnvironment.Prod:
+                    return "https://services-edge.foresee.com";
+                case ForeSeeEnvironment.Staging:
+                    return "https://services-edge-stg.foresee.com";
+                case ForeSeeEnvironment.QA:
+                    return "https://services-edge-qa.foresee.com";
+                case ForeSeeEnvironment.Dev:
+                    return "https://services-edge-dev.foresee.com";
+                default:
+                    throw new ArgumentException($"This {typeof(ForeSeeEnvironment)}={environment} does not have a AuthServiceUri");
+            }
         }
     }
 }
