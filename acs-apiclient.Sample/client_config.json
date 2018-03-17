@@ -1,0 +1,8 @@
+{
+    "ConsumerKey" : "Enter your value",
+    "ConsumerSecret" : "Enter your value",
+    "UsernameOnProd" : "Enter your value",
+    "PasswordOnProd" : "Enter your value",
+    "UsernameOnDev"  : "Enter your value",
+    "PasswordOnDev"  : "Enter your value"
+}
